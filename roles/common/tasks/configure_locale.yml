@@ -1,0 +1,31 @@
+---
+- name: set timezone
+  sudo: yes
+  file: src=/usr/share/zoneinfo/Europe/Paris dest=/etc/localtime state=link force=yes
+- name: "configure azerty keyboard"
+  sudo: yes
+  lineinfile:
+    dest: /etc/vconsole.conf
+    state: present
+    regexp: 'us$'
+    line: 'KEYMAP=fr-pc'
+  when: gui
+- name: "configure fr locale"
+  sudo: yes
+  lineinfile:
+    dest: /etc/locale.gen
+    state: present
+    regexp: '^#(fr_FR.UTF-8.*)$'
+    line: 'fr_FR.UTF-8 UTF-8'
+- name: "locale gen"
+  sudo: yes
+  command: locale-gen
+- name: "copy locale.conf"
+  sudo: yes
+  copy:
+    src: locale.conf
+    dest: /etc/locale.conf
+    owner: root
+    group: root
+    mode: 644
+

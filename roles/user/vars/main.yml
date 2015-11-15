@@ -1,0 +1,20 @@
+---
+link_common_items:
+  - src: archlinux/.config
+    dest: .config
+  - src: vim-config/.vim
+    dest: .vim
+  - src: vim-config/.vimrc
+    dest: .vimrc
+
+link_gui_items:
+  - src: archlinux/.Xresources
+    dest: .Xresources
+  - src: archlinux/.xinitrc
+    dest: .xinitrc
+  - src: archlinux/.fehbg
+    dest: .fehbg
+
+link_macbook_items:
+  - src: archlinux/.Xmodmap
+    dest: .Xmodmap

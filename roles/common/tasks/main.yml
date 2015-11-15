@@ -1,0 +1,9 @@
+---
+# pacman base package
+- name: install base package
+  sudo: yes
+  pacman: name={{ item }}
+  with_items: packages
+
+- include: configure_locale.yml
+  tags: conf-locale

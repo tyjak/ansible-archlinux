@@ -1,0 +1,12 @@
+---
+packages:
+  - rxvt-unicode
+  - git
+  - vim
+  - rsync
+  - mutt
+  - iftop
+  - tmux
+  - zsh
+  - syncthing
+  - w3m

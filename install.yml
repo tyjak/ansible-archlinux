@@ -1,0 +1,7 @@
+---
+# installation
+- hosts: all
+  roles:
+  - common
+  - user
+
