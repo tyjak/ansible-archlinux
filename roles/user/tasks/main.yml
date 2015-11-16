@@ -4,11 +4,13 @@
     repo: http://github.com/tyjak/archlinux
     dest: ~/src/archlinux
   tags: "dotfiles"
+
 - name: "checkout vim files"
   git:
     repo: http://github.com/tyjak/vim-config
     dest: ~/src/vim-config
   tags: "dotfiles"
+
 - name: "link common dot files"
   file:
     state: link
@@ -16,6 +18,7 @@
     dest: ~/{{ item.dest }}
   with_items: link_common_items
   tags: "dotfiles"
+
 - name: "link gui dot files"
   file:
     state: link
@@ -24,11 +27,21 @@
   with_items: link_gui_items
   when: gui
   tags: "dotfiles"
+
 - name: "vim install vundle"
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: ~/.vim/bundle/Vundle.vim
   tags: dotfiles
+
 - name: "init vim configuration"
   command: vim +PluginInstall +qall
+  tags: dotfiles
+
+- name: "enable syncthing"
+  command: "systemctl --user enable syncthing.service"
+  tags: dotfiles
+
+- name: "enable syncthing"
+  command: "systemctl --user start syncthing.service"
   tags: dotfiles
