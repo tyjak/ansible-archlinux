@@ -1,2 +1,3 @@
 ---
 arch_proc: "arm"
+keyboard: "mac-azerty"
