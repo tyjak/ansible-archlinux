@@ -1,0 +1,6 @@
+[submodule "roles/aur/aur"]
+	path = roles/aur/aur
+	url = https://gist.github.com/45bb9eee92c5f1fce66f.git
+[submodule "roles/common/tasks/aur"]
+	path = roles/common/tasks/aur
+	url = https://gist.github.com/45bb9eee92c5f1fce66f.git

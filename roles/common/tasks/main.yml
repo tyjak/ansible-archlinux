@@ -3,7 +3,45 @@
 - name: install base package
   sudo: yes
   pacman: name={{ item }}
-  with_items: packages
+  with_items: package
+
+#- include: configure_pacman.yml
+
+- include: configure_yaourt.yml
 
 - include: configure_locale.yml
-  tags: conf-locale
+
+- name: install gui package
+  sudo: yes
+  pacman: name={{ item }}
+  with_items: gui_package
+  when: gui
+
+- include: install_yaourt.yml
+  when: gui
+  
+- name: install fonts package
+  sudo: yes
+  pacman: name={{ item }}
+  with_items: fonts_package
+  when: gui
+  ignore_errors: yes
+
+- name: configure slim
+  sudo: yes
+  lineinfile:
+    dest: /etc/slim.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^# sessionstart_cmd', line: 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' }
+    - { regexp: '^# sessionstop_cmd', line: 'sessionstop_cmd    /usr/bin/sessreg -d -l $DISPLAY %user' }
+    - { regexp: '^current_theme.*default$', line: 'current_theme  archlinux-solarized' }
+
+- name: install slim theme
+  sudo: yes
+  git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
+  
+- name: enable slim at boot
+  sudo: yes
+  service: name=slim enabled=yes

@@ -6,7 +6,6 @@
   - ssh_user: "{{ lookup('env','USER') }}"
 
   tasks:
-  - debug: msg={{ ssh_user }}
   - name: INIT | Create admin system group
     group: name=admins system=yes state=present
     tags: init

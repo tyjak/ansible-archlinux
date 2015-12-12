@@ -1,0 +1,18 @@
+---
+- name: install yaourt if not present
+  sudo: yes
+  pacman: name=yaourt state=present
+
+- name: get new packages to install
+  command: yaourt -Q {{ item }}
+  register: packages_presence
+  with_items: yaourt_packages
+  ignore_errors: yes
+  changed_when: packages_presence|failed
+
+- name: install yaourt packages
+  sudo: no
+  command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
+  when: item|failed
+  with_items: packages_presence.results
+  ignore_errors: yes

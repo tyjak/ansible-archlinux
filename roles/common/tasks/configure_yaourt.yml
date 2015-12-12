@@ -1,0 +1,56 @@
+---
+# yaourt install and yaourt packages install
+- name: test if package-query installed
+  command: /usr/bin/pacman -Qs package-query
+  register: package_query_check
+  ignore_errors: true
+  tags: test
+
+- name: test if binutils installed
+  command: /usr/bin/pacman -Qs binutils
+  register: package_binutils
+  ignore_errors: true
+  tags: test
+
+- name: install binutils
+  sudo: yes
+  pacman: name=binutils state=latest update_cache=yes
+  when: package_binutils|failed
+  tags: test
+
+- name: test if gcc installed
+  command: /usr/bin/pacman -Qs bison
+  register: package_gcc
+  ignore_errors: true
+  tags: test
+
+- name: install base-devel
+  sudo: yes
+  pacman: name=base-devel state=latest update_cache=yes
+  when: package_gcc|failed
+  tags: test
+
+- name: install package-query if not present
+  include: aur/pkg.yml pkg_name=package-query makepkg_nonroot_user=david
+  when: package_query_check|failed
+  tags: test
+
+- name: test if yaourt installed
+  sudo: yes
+  command: /usr/bin/pacman -Qs yaourt
+  register: yaourt_check
+  ignore_errors: true
+  tags: test
+
+- name: Add repository to install yaourt if not present
+  sudo: yes
+  lineinfile:
+    dest: /etc/pacman.conf
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - line: '[archlinuxfr]'
+    - line: 'SigLevel = Never'
+    - line: "Server = http://repo.archlinux.fr/{{ arch_proc }}"
+  when: yaourt_check|failed
+  tags: test

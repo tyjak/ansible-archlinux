@@ -1,12 +1,61 @@
 ---
-packages:
+package:
+  - polkit
   - rxvt-unicode
   - git
   - vim
   - rsync
   - mutt
+  - htop
   - iftop
   - tmux
   - zsh
   - syncthing
   - w3m
+
+gui_package:
+  - i3-wm
+  - i3status
+  - dunst
+  - feh
+  - slim
+  - xorg-server
+  - xorg-xinit
+  - xorg-xrdb
+  - xclip
+  - xsel
+  - cairo
+  - freetype2
+  - fontconfig
+  - gtk2
+  - gtk3
+
+fonts_package:
+  - freetype2
+  - fontconfig
+  - ibfonts-meta-base
+  - ttf-courier-prime-ib
+  - ttf-dejavu-ib
+  - ttf-heuristica-ib
+  - ttf-liberation-ib
+  - ttf-symbola-ib
+  - ttf-inconsolata
+
+yaourt_packages:
+  - dmenu2
+  - htop-vim-solarized-git
+  - otf-inconsolata-dz-powerline-git
+  - otf-powerline-symbols-git
+  - i3pystatus
+  - python-pywapi
+  - python-netifaces
+  - weather
+  - ttf-weather
+  - ttf-font-awesome
+  - ttf-meslo-powerline-git
+  - numix-themes
+  - gtk-theme-numix-solarized
+  - vimb-git
+  - python-colour
+  - python-psutil
+  - python-netifaces

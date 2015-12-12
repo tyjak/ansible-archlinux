@@ -1,0 +1,30 @@
+# Add infinamity
+---
+- name: "test infinality configured"
+  sudo: yes
+  shell: "grep 'infinality' /etc/pacman.conf" 
+  register: infinality_configured
+  ignore_errors: yes
+- name: "add infinality-bundle" # https://wiki.archlinux.org/index.php/Unofficial_user_repositories#infinality-bundle
+  sudo: yes
+  lineinfile:
+    dest: "/etc/pacman.conf"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - line: "[infinality-bundle]"
+    - line: "Server = http://bohoomil.com/repo/$arch"
+    - line: "[infinality-bundle-fonts]"
+    - line: "Server = http://bohoomil.com/repo/fonts"
+- name: "test pacman add key since bug gpg"
+  sudo: yes
+  shell: "pacman-key -r 962DDE58 && pacman-key --lsign-key 962DDE58"
+  register: pacmankey_success
+  ignore_errors: true
+- name: "fix pacmankey if necessary"
+  sudo: yes
+  shell: "dirmngr < /dev/null"
+  when: pacmankey_success|failed
+- name: "add infinality-bundle key"
+  shell: "sudo pacman-key --init && sudo pacman-key -r 962DDE58 && sudo pacman-key --lsign-key 962DDE58"
+  changed_when: false
