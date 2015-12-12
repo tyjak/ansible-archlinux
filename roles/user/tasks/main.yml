@@ -38,6 +38,14 @@
   command: vim +PluginInstall +qall
   tags: dotfiles
 
+- name: vimfile backup dir
+  file: path=~/.vimfiles/bak state=directory recurse=yes
+  tags: dotfiles
+
+- name: vimfile undo dir
+  file: path=~/.vimfiles/undo state=directory
+  tags: dotfiles
+
 - name: "enable syncthing"
   command: "systemctl --user enable syncthing.service"
   tags: dotfiles

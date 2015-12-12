@@ -14,7 +14,6 @@ package:
   - w3m
 
 gui_package:
-  - i3-wm
   - i3status
   - dunst
   - feh
@@ -25,23 +24,27 @@ gui_package:
   - xclip
   - xsel
   - cairo
-  - freetype2
-  - fontconfig
   - gtk2
   - gtk3
 
 fonts_package:
-  - freetype2
-  - fontconfig
-  - ibfonts-meta-base
-  - ttf-courier-prime-ib
-  - ttf-dejavu-ib
-  - ttf-heuristica-ib
-  - ttf-liberation-ib
-  - ttf-symbola-ib
+  - freetype2-infinality
+  - xorg-xfontsel
+  - terminus-font
+  - terminus-font-ttf
+  - ttf-dejavu
+  - otf-texgyre
+  - ttf-mac-fonts
+  - ttf-msfonts
+  - ttf-weather-icons
+  - otf-font-awesome
+  - otf-meslo-powerline-git
+  - otf-powerline-symbols-git
   - ttf-inconsolata
+  - fontconfig-infinality
 
 yaourt_packages:
+  - i3-git
   - dmenu2
   - htop-vim-solarized-git
   - otf-inconsolata-dz-powerline-git
@@ -49,13 +52,9 @@ yaourt_packages:
   - i3pystatus
   - python-pywapi
   - python-netifaces
+  - python-colour
+  - python-psutil
   - weather
-  - ttf-weather
-  - ttf-font-awesome
-  - ttf-meslo-powerline-git
   - numix-themes
   - gtk-theme-numix-solarized
   - vimb-git
-  - python-colour
-  - python-psutil
-  - python-netifaces

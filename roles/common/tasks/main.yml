@@ -19,13 +19,30 @@
 
 - include: install_yaourt.yml
   when: gui
+  tags: yaourt
   
-- name: install fonts package
-  sudo: yes
-  pacman: name={{ item }}
+- name: get new fonts to install
+  command: yaourt -Q {{ item }}
+  register: fonts_presence
   with_items: fonts_package
+  ignore_errors: yes
+  changed_when: fonts_presence|failed
+  tags: fonts
+
+- name: install fonts package
+  sudo: no
+  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
+  when: item|failed
+  with_items: fonts_presence.results
   when: gui
   ignore_errors: yes
+  tags: fonts
+
+- name: configure keyboard
+  sudo: yes
+  copy: src=00-keyboard-mac-azerty.conf dest=/etc/X11/xorg.conf.d/00-keyboard.conf
+  when: keyboard == "mac-azerty"
+  tags: keyboard
 
 - name: configure slim
   sudo: yes
@@ -37,6 +54,24 @@
     - { regexp: '^# sessionstart_cmd', line: 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' }
     - { regexp: '^# sessionstop_cmd', line: 'sessionstop_cmd    /usr/bin/sessreg -d -l $DISPLAY %user' }
     - { regexp: '^current_theme.*default$', line: 'current_theme  archlinux-solarized' }
+
+- name: has bluetooth ?
+  shell: "lsusb | grep -i bluetooth"
+  register: has_bluetooth
+  ignore_errors: yes
+  tags: bluetooth
+
+- name: install bluetooth
+  sudo: yes
+  pacman: name=bluez,bluez-utils,dbus state=present
+  when: has_bluetooth|success
+  tags: bluetooth
+
+- name: enable bluetooth on start
+  sudo: yes
+  service: name=bluetooth state=started enabled=yes
+  when: has_bluetooth|success
+  tags: bluetooth
 
 - name: install slim theme
   sudo: yes
