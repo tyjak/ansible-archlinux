@@ -12,6 +12,8 @@ package:
   - zsh
   - syncthing
   - w3m
+  - xclip
+  - xsel
 
 gui_package:
   - i3status
@@ -41,6 +43,8 @@ fonts_package:
   - otf-meslo-powerline-git
   - otf-powerline-symbols-git
   - ttf-inconsolata
+  - ttf-liberation
+  - ttf-freefont
   - fontconfig-infinality
 
 yaourt_packages:
@@ -58,3 +62,4 @@ yaourt_packages:
   - numix-themes
   - gtk-theme-numix-solarized
   - vimb-git
+

@@ -1,3 +1,23 @@
 ---
 arch_proc: "arm"
 keyboard: "mac-azerty"
+
+misc_package:
+  - cups
+  - brother-hl2030
+  - lxdm
+  - thunderbird
+  - firefox
+  - libreoffice-fresh
+  - xpad
+  - gvfs
+
+theme_package:
+  - gtk-engine-equinox
+  - ambiance-radiance-flat-colors-suite
+  - faenza-icon-theme
+  - faenza-cupertino-icon-theme
+
+additional_service:
+  - cups
+  - gvfs

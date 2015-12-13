@@ -10,16 +10,21 @@
     state: present
     regexp: '^#(fr_FR.UTF-8.*)$'
     line: 'fr_FR.UTF-8 UTF-8'
+    backrefs: yes
+  register: has_configured
 
 - name: "locale gen"
   sudo: yes
   command: locale-gen
+  when: has_configured|failed
 
 - name: set system locale
   sudo: yes
   command: "localectl set-locale LANG=fr_FR.UTF-8"
+  when: has_configured|failed
 
 - name: set keyboard
   sudo: yes
   command: "localectl set-keymap --no-convert fr"
+  when: has_configured|failed
 

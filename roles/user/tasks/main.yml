@@ -3,13 +3,16 @@
   git:
     repo: http://github.com/tyjak/archlinux
     dest: ~/src/archlinux
+    update: no
   tags: "dotfiles"
 
 - name: "checkout vim files"
   git:
     repo: http://github.com/tyjak/vim-config
     dest: ~/src/vim-config
-  tags: "dotfiles"
+    update: no
+  register: vim_config_installed
+  tags: dotfiles
 
 - name: "link common dot files"
   file:
@@ -32,10 +35,12 @@
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: ~/.vim/bundle/Vundle.vim
+    update: no
   tags: dotfiles
 
 - name: "init vim configuration"
   command: vim +PluginInstall +qall
+  when: vim_config_installed|changed
   tags: dotfiles
 
 - name: vimfile backup dir
@@ -44,12 +49,4 @@
 
 - name: vimfile undo dir
   file: path=~/.vimfiles/undo state=directory
-  tags: dotfiles
-
-- name: "enable syncthing"
-  command: "systemctl --user enable syncthing.service"
-  tags: dotfiles
-
-- name: "enable syncthing"
-  command: "systemctl --user start syncthing.service"
   tags: dotfiles
