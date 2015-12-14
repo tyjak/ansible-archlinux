@@ -102,6 +102,7 @@
 - name: has bluetooth ?
   shell: "lsusb | grep -i bluetooth"
   register: has_bluetooth
+  changed_when: has_bluetooth|failed
   ignore_errors: yes
   tags: bluetooth
 
