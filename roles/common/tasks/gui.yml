@@ -1,0 +1,50 @@
+---
+
+# packages 
+- include: gui_packages.yml
+  tags: yaourt
+
+- name: has bluetooth ?
+  shell: "lsusb | grep -i bluetooth"
+  register: has_bluetooth
+  changed_when: has_bluetooth|failed
+  ignore_errors: yes
+  tags: bluetooth
+
+- name: install bluetooth
+  sudo: yes
+  pacman: name=bluez,bluez-utils,dbus,blueman state=present
+  when: has_bluetooth|success
+  tags: bluetooth
+
+- name: up bluetooth device on start
+  sudo: yes
+  copy: src=10-local.rules dest=/etc/udev/rules.d/10-local.rules
+  when: has_bluetooth|success
+  tags: bluetooth
+
+- name: enable bluetooth on start
+  sudo: yes
+  service: name=bluetooth state=started enabled=yes
+  when: has_bluetooth|success
+  tags: bluetooth
+
+- name: configure slim
+  sudo: yes
+  lineinfile:
+    dest: /etc/slim.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backrefs: yes
+  with_items:
+    - { regexp: '^# sessionstart_cmd', line: 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' }
+    - { regexp: '^# sessionstop_cmd', line: 'sessionstop_cmd    /usr/bin/sessreg -d -l $DISPLAY %user' }
+    - { regexp: '^current_theme.*default$', line: 'current_theme  archlinux-solarized' }
+
+- name: install slim theme
+  sudo: yes
+  git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
+  
+- name: enable slim at boot
+  sudo: yes
+  service: name=slim enabled=yes

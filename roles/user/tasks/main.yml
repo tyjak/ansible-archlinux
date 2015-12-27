@@ -50,3 +50,7 @@
 - name: vimfile undo dir
   file: path=~/.vimfiles/undo state=directory
   tags: dotfiles
+
+  #- include: vpn_adsnovo.yml
+  #  when: vpn|default(false)
+  #  tags: vpn

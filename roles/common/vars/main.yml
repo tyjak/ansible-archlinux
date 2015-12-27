@@ -1,7 +1,6 @@
 ---
 package:
   - polkit
-  - rxvt-unicode
   - git
   - vim
   - rsync
@@ -12,10 +11,9 @@ package:
   - zsh
   - syncthing
   - w3m
-  - xclip
-  - xsel
 
-gui_package:
+gui_pacman_package:
+  - rxvt-unicode
   - i3status
   - dunst
   - feh
@@ -28,6 +26,22 @@ gui_package:
   - cairo
   - gtk2
   - gtk3
+
+gui_yaourt_packages:
+  - i3-git
+  - dmenu2
+  - htop-vim-solarized-git
+  - otf-inconsolata-dz-powerline-git
+  - otf-powerline-symbols-git
+  - i3pystatus
+  - python-pywapi
+  - python-netifaces
+  - python-colour
+  - python-psutil
+  - weather
+  - numix-themes
+  - gtk-theme-numix-solarized
+  - vimb-git
 
 fonts_package:
   - freetype2-infinality
@@ -47,19 +61,7 @@ fonts_package:
   - ttf-freefont
   - fontconfig-infinality
 
-yaourt_packages:
-  - i3-git
-  - dmenu2
-  - htop-vim-solarized-git
-  - otf-inconsolata-dz-powerline-git
-  - otf-powerline-symbols-git
-  - i3pystatus
-  - python-pywapi
-  - python-netifaces
-  - python-colour
-  - python-psutil
-  - weather
-  - numix-themes
-  - gtk-theme-numix-solarized
-  - vimb-git
-
+vpn_package:
+  - remmina
+  - remmina-plugin-rdesktop
+  - pptpclient

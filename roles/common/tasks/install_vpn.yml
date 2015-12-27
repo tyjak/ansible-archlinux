@@ -1,0 +1,18 @@
+---
+- name: get new vpn package to install
+  command: yaourt -Q {{ item }}
+  register: vpn_presence
+  with_items: vpn_package
+  when: vpn|default(false)
+  changed_when: vpn_presence|failed
+  ignore_errors: yes
+  tags: vpn
+
+- name: install vpn package
+  sudo: no
+  command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
+  with_items: vpn_presence.results
+  when: item|failed and gui
+  ignore_errors: yes
+  tags: vpn
+

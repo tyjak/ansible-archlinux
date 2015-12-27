@@ -1,6 +1,7 @@
 ---
 arch_proc: "arm"
 keyboard: "mac-azerty"
+vpn: true
 
 misc_package:
   - cups
@@ -11,6 +12,9 @@ misc_package:
   - libreoffice-fresh
   - xpad
   - gvfs
+  - midori
+  - mplayer
+  - mps-youtube
 
 theme_package:
   - gtk-engine-equinox
@@ -19,5 +23,5 @@ theme_package:
   - faenza-cupertino-icon-theme
 
 additional_service:
-  - cups
+  - org.cups.cupsd.service
   - gvfs
