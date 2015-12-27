@@ -61,4 +61,4 @@
 
 - name: Install yaourt
   sudo: yes
-  pacman: name=yaourt state=present
+  pacman: name=yaourt state=present update_cache=yes
