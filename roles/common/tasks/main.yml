@@ -1,5 +1,9 @@
 ---
 # pacman base package
+- name: update pacman cache
+  sudo: yes
+  pacman: update_cache=yes
+
 - name: install base package
   sudo: yes
   pacman: name={{ item }}
@@ -54,12 +58,6 @@
   with_items: additional_service
   when: misc_presence.changed
   tags: misc
-
-- name: configure keyboard
-  sudo: yes
-  copy: src=00-keyboard-mac-azerty.conf dest=/etc/X11/xorg.conf.d/00-keyboard.conf
-  when: keyboard == "mac-azerty"
-  tags: keyboard
 
 - name: enable syncthing
   command: systemctl --user enable syncthing.service

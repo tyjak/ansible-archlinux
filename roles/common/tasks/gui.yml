@@ -4,6 +4,12 @@
 - include: gui_packages.yml
   tags: yaourt
 
+- name: configure keyboard
+  sudo: yes
+  copy: src=00-keyboard-mac-azerty.conf dest=/etc/X11/xorg.conf.d/00-keyboard.conf
+  when: keyboard|default(False) == 'mac-azerty'
+  tags: keyboard
+
 - name: has bluetooth ?
   shell: "lsusb | grep -i bluetooth"
   register: has_bluetooth
