@@ -1,6 +1,6 @@
 ---
 arch_proc: "arm"
-keyboard: "mac-azerty"
+keyboard: "pc-fr"
 vpn: true
 
 misc_package:

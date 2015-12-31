@@ -17,6 +17,20 @@
   when: gui
   tags: gui
 
+- name: has wifi ?
+  shell: dmesg | grep "WLAN"
+  register: has_wifi
+  tags: wifi
+
+- debug: msg={{ has_wifi.changed }}
+  tags: wifi
+
+- name: install wifi
+  sudo: yes
+  pacman: name=wpa_supplicant state=present
+  when: has_wifi.changed
+  tags: wifi
+
 - name: get host misc packages
   command: yaourt -Q {{ item }}
   register: misc_presence

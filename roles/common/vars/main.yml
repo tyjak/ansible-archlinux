@@ -11,6 +11,7 @@ package:
   - zsh
   - syncthing
   - w3m
+  - dialog
 
 gui_pacman_package:
   - rxvt-unicode
