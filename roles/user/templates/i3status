@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+
+import subprocess
+
+from i3pystatus import Status
+
+status = Status(standalone=True)
+
+# Displays clock like this:
+# Tue 30 Jul 11:59:46 PM KW31
+#                          ^-- calendar week
+status.register("clock")
+
+# Show sound
+#status.register("alsa")
+
+# Show battery
+#status.register("battery",
+#	format="{remaining} {status}")
+
+# Show network
+status.register("network",
+	interface="{{ i3.status.network.interface|default('eth0') }}",
+    format_up="{{ i3.status.network.format_up|default('{network_graph}{kbs}KB/s') }}",
+    dynamic_color={{ i3.status.network.dynamic_color|default('True') }},
+    graph_style="{{ i3.status.network.graph_style|default('Fill') }}",
+    graph_width={{ i3.status.network.graph_width|default(5) }}
+	)
+
+#Show backlight
+#status.register("backlight",
+#	format="{percentage}%")
+
+# Shows the average load of the last minute and the last 5 minutes
+# (the default value for format is used)
+status.register("load")
+
+# Shows disk usage of /
+# Format:
+# 42/128G [86G]
+status.register("disk",
+    path="/",
+    #format="{used}/{total}G [{avail}G]",)
+    format="{avail}G",)
+
+# Show weather
+status.register("weather",
+        location_code="FRXX5264",
+        colorize=True,
+        format="{current_temp} {current_wind} {humidity}%",)
+
+
+status.register("bitcoin",
+        currency="EUR")
+
+status.run()

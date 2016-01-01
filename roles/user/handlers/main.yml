@@ -1,0 +1,5 @@
+---
+
+- name: restart i3
+  command: i3-msg restart
+

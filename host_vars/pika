@@ -15,6 +15,7 @@ misc_package:
   - midori
   - mplayer
   - mps-youtube
+  - xf86-input-synaptics
 
 theme_package:
   - gtk-engine-equinox
@@ -25,3 +26,12 @@ theme_package:
 additional_service:
   - org.cups.cupsd.service
   - gvfs
+
+i3:
+  status:
+    network:
+      interface: "wlan0"
+      format_up: "\uf1eb {network_graph}{kbs}KB/s {essid} {quality}%"
+      dynamic_color: True
+      graph_style: braille-fill
+      graph_width: 20

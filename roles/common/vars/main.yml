@@ -12,6 +12,7 @@ package:
   - syncthing
   - w3m
   - dialog
+  - python-pip
 
 gui_pacman_package:
   - rxvt-unicode

@@ -1,0 +1,18 @@
+---
+
+- name: if wifi install basiciw for i3 status
+  sudo: yes
+  pip: name=basiciw
+  when: has_wifi.changed
+  tags: i3
+
+- name: configure i3 status
+  template: 
+    src: i3status
+    dest: ~/.config/i3/status.py
+  when: i3.status|default(fail)
+  notify: restart i3
+  tags: i3
+
+
+

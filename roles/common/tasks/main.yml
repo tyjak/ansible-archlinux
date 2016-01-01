@@ -26,9 +26,6 @@
   register: has_wifi
   tags: wifi
 
-- debug: msg={{ has_wifi.changed }}
-  tags: wifi
-
 - name: install wifi
   sudo: yes
   pacman: name=wpa_supplicant state=present
