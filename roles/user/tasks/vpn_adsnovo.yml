@@ -1,0 +1,40 @@
+---
+- name: assure ppp options exists
+  stat: path=/etc/ppp/options
+  register: ppp_options
+  tags: vpn
+
+- name: configure ppp adsnovo ms-dns
+  lineinfile:
+    dest: /etc/ppp/options
+    regexp: item.regexp
+    line: item.line
+    backrefs: true
+  with_items:
+    - regexp: '^# ms-dns 192.168.1.1'
+      line: 'ms-dns 192.168.1.1'
+    - regexp: '^# ms-wins 192.168.1.50'
+      line: 'ms-wins 192.168.1.1'
+  when: ppp_options|success
+  tags: vpn
+
+- name: install adsnovo config
+  sudo: yes
+  copy: content="{{ lookup('pipe','ansible-vault view vpn/adsnovo')|regex_replace('\"','\\\"') }}" dest=/etc/ppp/peers/adsnovo
+  tags: vpn
+
+- name: install adsnovo password
+  sudo: yes
+  copy: content="{{ lookup('pipe','ansible-vault view vpn/chap-secrets')|regex_replace('\"','\\\"') }}" dest=/etc/ppp/chap-secrets owner=root group=root mode=0400
+  tags: vpn
+
+- name: add route
+  sudo: yes
+  copy: content="ip route add 192.168.1.0/24 dev ppp0" dest=/etc/ppp/ip-up.d/01-routes.sh owner=root group=root mode=0755
+  tags: vpn
+
+- name: add dns
+  sudo: yes
+  copy: content="nameserver 192.168.1.1" dest=/etc/ppp/resolv.conf owner=root group=root mode=0644
+  tags: vpn
+

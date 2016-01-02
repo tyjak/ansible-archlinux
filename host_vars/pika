@@ -30,8 +30,10 @@ additional_service:
 i3:
   status:
     network:
-      interface: "wlan0"
+      interface: wlan0
       format_up: "\uf1eb {network_graph}{kbs}KB/s {essid} {quality}%"
       dynamic_color: True
       graph_style: braille-fill
       graph_width: 20
+    vpn:
+      name: ADSNOVO

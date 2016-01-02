@@ -53,6 +53,7 @@
 
 - include: i3.yml
   when: i3|default(false)
-  #- include: vpn_adsnovo.yml
-  #  when: vpn|default(false)
-  #  tags: vpn
+
+- include: vpn_adsnovo.yml
+  when: vpn|default(false)
+  tags: vpn

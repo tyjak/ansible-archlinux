@@ -27,6 +27,13 @@ status.register("network",
     graph_width={{ i3.status.network.graph_width|default(5) }}
 	)
 
+# Show vpn
+status.register("runwatch",
+    path="/var/run/ppp0.pid",
+    name="VPN {{ i3.status.vpn.name|default('NO NAME') }} ",
+    format_up="{name}",
+    format_down=""
+    )
 #Show backlight
 #status.register("backlight",
 #	format="{percentage}%")
