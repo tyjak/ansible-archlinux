@@ -51,6 +51,9 @@
   file: path=~/.vimfiles/undo state=directory
   tags: dotfiles
 
+- include: config.yml
+  when: config|default(false)
+
 - include: i3.yml
   when: i3|default(false)
 

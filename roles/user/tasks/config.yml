@@ -1,0 +1,5 @@
+---
+
+- name: add settings in xinitrc
+  lineinfile: dest=~/.xinitrc insertafter="^# var settings" line="{{ item }}"
+  with_items: config.xinitrc

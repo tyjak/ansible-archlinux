@@ -37,3 +37,10 @@ i3:
       graph_width: 20
     vpn:
       name: ADSNOVO
+
+config:
+  xinitrc:
+    - export BROWSER=/usr/bin/vimb
+    - export PRINTER=Brother_HL_2030_series
+  cupsclient:
+    - 192.168.0.40
