@@ -28,20 +28,18 @@ gui_pacman_package:
   - cairo
   - gtk2
   - gtk3
+  - numix-themes
 
 gui_yaourt_packages:
   - i3-git
   - dmenu2
   - htop-vim-solarized-git
-  - otf-inconsolata-dz-powerline-git
-  - otf-powerline-symbols-git
   - i3pystatus
   - python-pywapi
   - python-netifaces
   - python-colour
   - python-psutil
   - weather
-  - numix-themes
   - gtk-theme-numix-solarized
   - vimb-git
 
@@ -51,9 +49,10 @@ fonts_package:
   - terminus-font
   - terminus-font-ttf
   - ttf-dejavu
+  - otf-inconsolata-dz-powerline-git
+  - otf-powerline-symbols-git
   - otf-texgyre
   - ttf-mac-fonts
-  - ttf-msfonts
   - ttf-weather-icons
   - otf-font-awesome
   - otf-meslo-powerline-git

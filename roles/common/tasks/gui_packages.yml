@@ -30,7 +30,7 @@
 
 - name: install fonts package
   sudo: no
-  command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
+  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   with_items: fonts_presence.results
   when: item|failed
   ignore_errors: yes
@@ -47,7 +47,7 @@
 
 - name: install theme package
   sudo: no
-  command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
+  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   with_items: theme_presence.results
   when: item|failed
   ignore_errors: yes

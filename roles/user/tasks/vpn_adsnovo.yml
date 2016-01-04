@@ -16,16 +16,19 @@
     - regexp: '^# ms-wins 192.168.1.50'
       line: 'ms-wins 192.168.1.1'
   when: ppp_options|success
+  register: configure_vpn
   tags: vpn
 
 - name: install adsnovo config
   sudo: yes
   copy: content="{{ lookup('pipe','ansible-vault view vpn/adsnovo')|regex_replace('\"','\\\"') }}" dest=/etc/ppp/peers/adsnovo
+  when: configure_vpn.changed
   tags: vpn
 
 - name: install adsnovo password
   sudo: yes
   copy: content="{{ lookup('pipe','ansible-vault view vpn/chap-secrets')|regex_replace('\"','\\\"') }}" dest=/etc/ppp/chap-secrets owner=root group=root mode=0400
+  when: configure_vpn.changed
   tags: vpn
 
 - name: add route

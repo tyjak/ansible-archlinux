@@ -24,12 +24,14 @@
 - name: has wifi ?
   shell: dmesg | grep "WLAN"
   register: has_wifi
+  changed_when: has_wifi|success
+  ignore_errors: true
   tags: wifi
 
 - name: install wifi
   sudo: yes
   pacman: name=wpa_supplicant state=present
-  when: has_wifi.changed
+  when: has_wifi|success
   tags: wifi
 
 - name: get host misc packages
@@ -43,7 +45,7 @@
 
 - name: install misc package
   sudo: no
-  command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
+  command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
   with_items: misc_presence.results
   when: item|failed and gui
   ignore_errors: yes
@@ -55,17 +57,6 @@
   with_items: additional_service
   when: misc_presence.changed
   tags: misc
-
-- name: enable syncthing
-  command: systemctl --user enable syncthing.service
-  register: enable_syncthing
-  changed_when: enable_syncthing.stderr
-  tags: syncthing
-
-- name: start syncthing
-  command: systemctl --user start syncthing.service
-  when: enable_syncthing.stderr
-  tags: syncthing
 
   #- include: install_vpn.yml
   #  tags: vpn

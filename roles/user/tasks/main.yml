@@ -51,6 +51,17 @@
   file: path=~/.vimfiles/undo state=directory
   tags: dotfiles
 
+- name: enable syncthing
+  command: systemctl --user enable syncthing.service
+  register: enable_syncthing
+  changed_when: enable_syncthing|success
+  tags: syncthing
+
+- name: start syncthing
+  command: systemctl --user start syncthing.service
+  when: enable_syncthing|sucess
+  tags: syncthing
+
 - include: config.yml
   when: config|default(false)
 
