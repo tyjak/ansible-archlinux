@@ -47,7 +47,7 @@
   sudo: no
   command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
   with_items: misc_presence.results
-  when: item|failed and gui
+  when: item|failed
   ignore_errors: yes
   tags: misc
 

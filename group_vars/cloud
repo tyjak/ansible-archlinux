@@ -1,2 +1,5 @@
 ---
 gui: false
+
+#misc_package:
+#  - syncthing-cli-git

@@ -59,7 +59,7 @@
 
 - name: start syncthing
   command: systemctl --user start syncthing.service
-  when: enable_syncthing|sucess
+  when: enable_syncthing|success
   tags: syncthing
 
 - include: config.yml
