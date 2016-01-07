@@ -33,7 +33,7 @@ gui_pacman_package:
 gui_yaourt_packages:
   - i3-git
   - dmenu2
-  - htop-vim-solarized-git
+#  - htop-vim-solarized-git
   - i3pystatus
   - python-pywapi
   - python-netifaces
@@ -44,7 +44,7 @@ gui_yaourt_packages:
   - vimb-git
 
 fonts_package:
-  - freetype2-infinality
+#  - freetype2-infinality
   - xorg-xfontsel
   - terminus-font
   - terminus-font-ttf
@@ -59,8 +59,8 @@ fonts_package:
   - otf-powerline-symbols-git
   - ttf-inconsolata
   - ttf-liberation
-  - ttf-freefont
-  - fontconfig-infinality
+#  - ttf-freefont
+#  - fontconfig-infinality
 
 vpn_package:
   - remmina

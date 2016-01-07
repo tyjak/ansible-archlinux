@@ -43,7 +43,7 @@
   ignore_errors: yes
   tags: misc
 
-- name: install misc package
+- name: install host misc package
   sudo: no
   command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
   with_items: misc_presence.results
@@ -51,7 +51,7 @@
   ignore_errors: yes
   tags: misc
 
-- name: enable additional service
+- name: enable host additional service
   sudo: yes
   service: name={{ item }} state=started enabled=yes
   with_items: additional_service
