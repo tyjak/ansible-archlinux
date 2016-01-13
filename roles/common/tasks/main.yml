@@ -1,6 +1,6 @@
 ---
 # pacman base package
-- name: update pacman cache
+- name: update and upgrade
   sudo: yes
   pacman: update_cache=yes
 

@@ -1,0 +1,28 @@
+- hosts: all
+  sudo: yes
+  tags: init
+  vars:
+  - ssh_user: "{{ lookup('env','USER') }}"
+
+  tasks:
+  - name: INIT | Create admin system group
+    group: name=admins system=yes state=present
+    tags: init
+
+  - name: INIT | Create admin account from current user
+    user: name={{ ssh_user }} state=present shell=/bin/bash groups=admins
+    tags: init
+
+  - name: INIT | Make sure essential software is installed
+    pacman: name={{ item }} state=latest
+    with_items:
+    - sudo
+    tags: init
+
+  - name: INIT | Install ssh public key from current account
+    authorized_key: user={{ ssh_user}} key="{{ lookup('file','~/.ssh/passwordless_rsa.pub') }}"
+    tags: init
+
+  - name: INIT | Install sudoers file for admin accounts
+    lineinfile: "dest=/etc/sudoers.d/admins state=present create=yes regexp='^%admins' line='%admins ALL=(ALL:ALL) NOPASSWD: SETENV: ALL' owner=root group=root mode=0440"
+    tags: init

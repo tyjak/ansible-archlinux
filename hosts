@@ -4,3 +4,7 @@ do2
 
 [ground]
 pika
+archee
+
+[vagrant]
+192.168.33.33
