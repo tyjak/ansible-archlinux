@@ -6,6 +6,8 @@ link_common_items:
     dest: .vim
   - src: vim-config/.vimrc
     dest: .vimrc
+  - src: vim-config/.vimrc.more
+    dest: .vimrc.more
 
 link_gui_items:
   - src: archlinux/.Xresources

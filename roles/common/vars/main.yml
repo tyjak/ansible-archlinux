@@ -2,7 +2,6 @@
 package:
   - polkit
   - git
-  - vim
   - rsync
   - mutt
   - htop
@@ -14,7 +13,11 @@ package:
   - dialog
   - python-pip
 
+nogui_pacman_package:
+  - vim
+
 gui_pacman_package:
+  - gvim
   - rxvt-unicode
   - i3status
   - dunst

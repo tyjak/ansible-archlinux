@@ -21,6 +21,10 @@
   when: gui
   tags: gui
 
+- include: nogui.yml
+  when: not gui
+  tags: nogui
+
 - name: has wifi ?
   shell: dmesg | grep "WLAN"
   register: has_wifi
