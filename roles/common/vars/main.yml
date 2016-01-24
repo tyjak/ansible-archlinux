@@ -2,6 +2,7 @@
 package:
   - polkit
   - git
+  - rxvt-unicode
   - vim
   - rsync
   - mutt
@@ -15,7 +16,6 @@ package:
   - python-pip
 
 gui_pacman_package:
-  - rxvt-unicode
   - i3status
   - dunst
   - feh
@@ -29,6 +29,7 @@ gui_pacman_package:
   - gtk2
   - gtk3
   - numix-themes
+  - xorg-xfontsel
 
 gui_yaourt_packages:
   - i3-git
@@ -44,8 +45,7 @@ gui_yaourt_packages:
   - vimb-git
 
 fonts_package:
-  - freetype2-infinality
-  - xorg-xfontsel
+#  - freetype2-infinality
   - terminus-font
   - terminus-font-ttf
   - ttf-dejavu
@@ -60,7 +60,7 @@ fonts_package:
   - ttf-inconsolata
   - ttf-liberation
   - ttf-freefont
-  - fontconfig-infinality
+ #  - fontconfig-infinality
 
 vpn_package:
   - remmina

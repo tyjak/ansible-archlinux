@@ -19,22 +19,6 @@
   when: item|failed
   with_items: packages_presence.results
   ignore_errors: yes
-  
-- name: get new fonts to install
-  command: yaourt -Q {{ item }}
-  register: fonts_presence
-  with_items: fonts_package
-  changed_when: fonts_presence|failed
-  ignore_errors: yes
-  tags: fonts
-
-- name: install fonts package
-  sudo: no
-  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
-  with_items: fonts_presence.results
-  when: item|failed
-  ignore_errors: yes
-  tags: fonts
 
 - name: get host theme packages
   command: yaourt -Q {{ item }}

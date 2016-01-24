@@ -1,9 +1,24 @@
 ---
+- name: set hostname
+  sudo: yes
+  lineinfile: dest=/etc/hostname regexp="^{{ hostname|default(ansible_nodename) }}" line="{{ hostname|default(ansible_nodename) }}" create=yes state=present backrefs=yes
+  tags: hostname
+
+- name: set hosts
+  sudo: yes
+  lineinfile: dest=/etc/hosts regexp="{{ item.regexp }}" line="{{ item.line }}" create=yes state=present backrefs=yes
+  with_items:
+    - regexp: '^127.*localhost$'
+      line: "127.0.0.1  {{ hostname|default(ansible_nodename) }}.localdomain  {{ hostname|default(ansible_nodename) }}"
+    - regexp: '^::1.*localhost$'
+      line: "::1  {{ hostname|default(ansible_nodename) }}.localdomain  {{ hostname|default(ansible_nodename) }}"
+  tags: hostname
+
 - name: set timezone
   sudo: yes
   file: src=/usr/share/zoneinfo/Europe/Paris dest=/etc/localtime state=link force=yes
 
-- name: "configure fr locale"
+- name: configure fr locale
   sudo: yes
   lineinfile:
     dest: /etc/locale.gen
@@ -13,7 +28,7 @@
     backrefs: yes
   register: has_configured
 
-- name: "locale gen"
+- name: locale gen
   sudo: yes
   command: locale-gen
   when: has_configured|failed

@@ -21,6 +21,9 @@
   when: gui
   tags: gui
 
+- include: fonts.yml
+  tags: fonts
+
 - name: has wifi ?
   shell: dmesg | grep "WLAN"
   register: has_wifi
