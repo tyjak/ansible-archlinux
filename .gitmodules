@@ -3,4 +3,4 @@
 	url = https://gist.github.com/45bb9eee92c5f1fce66f.git
 [submodule "roles/common/tasks/aur"]
 	path = roles/common/tasks/aur
-	url = https://gist.github.com/45bb9eee92c5f1fce66f.git
+	url = http://gist.github.com/tyjak/f4b90009bd05056a0411.git

@@ -1,6 +1,6 @@
 ---
 # pacman base package
-- name: update pacman cache
+- name: update and upgrade
   sudo: yes
   pacman: update_cache=yes
 
@@ -20,6 +20,10 @@
 - include: gui.yml
   when: gui
   tags: gui
+
+- include: nogui.yml
+  when: not gui
+  tags: nogui
 
 - include: fonts.yml
   tags: fonts
@@ -46,7 +50,7 @@
   ignore_errors: yes
   tags: misc
 
-- name: install misc package
+- name: install host misc package
   sudo: no
   command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
   with_items: misc_presence.results
@@ -54,7 +58,7 @@
   ignore_errors: yes
   tags: misc
 
-- name: enable additional service
+- name: enable host additional service
   sudo: yes
   service: name={{ item }} state=started enabled=yes
   with_items: additional_service
