@@ -32,15 +32,8 @@
   when: gui
   tags: "dotfiles"
 
-- name: "vim install vundle"
-  git:
-    repo: https://github.com/VundleVim/Vundle.vim.git
-    dest: ~/.vim/bundle/Vundle.vim
-    update: no
-  tags: dotfiles
-
 - name: "init vim configuration"
-  command: vim +PluginInstall +qall
+  command: vim +PlugInstall +qall
   when: vim_config_installed|changed
   tags: dotfiles
 
