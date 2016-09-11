@@ -1,7 +1,9 @@
 ---
 arch_proc: "arm"
 keyboard: "pc-fr"
-vpn: true
+vpn:
+  ppp: false
+  openvpn: true
 
 misc_package:
   - cups
@@ -16,6 +18,12 @@ misc_package:
   - mplayer
   - mps-youtube
   - xf86-input-synaptics
+  - vifm
+  - pulseaudio-raop2
+  - avahi
+  - nss-mdns
+  - paprefs
+  - rtv
 
 theme_package:
   - gtk-engine-equinox
@@ -26,6 +34,7 @@ theme_package:
 additional_service:
   - org.cups.cupsd.service
   - gvfs
+  - avahi-daemon.service
 
 i3:
   status:

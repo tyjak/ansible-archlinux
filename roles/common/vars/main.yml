@@ -2,6 +2,7 @@
 package:
   - polkit
   - git
+  - rxvt-unicode
   - rsync
   - mutt
   - htop
@@ -32,6 +33,7 @@ gui_pacman_package:
   - gtk2
   - gtk3
   - numix-themes
+  - xorg-xfontsel
 
 gui_yaourt_packages:
   - i3-git

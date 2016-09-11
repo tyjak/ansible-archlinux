@@ -1,6 +1,7 @@
 # servers with nogui
 [cloud]
 do2
+vultr
 
 [ground]
 pika
@@ -8,3 +9,6 @@ archee
 
 [vagrant]
 192.168.33.33
+
+[vultr]
+45.32.239.101

@@ -1,0 +1,1 @@
+roles/user/files/vpn/adsnovo_openvpn.vault filter=git-crypt diff=git-crypt

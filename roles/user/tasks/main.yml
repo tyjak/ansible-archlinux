@@ -32,15 +32,8 @@
   when: gui
   tags: "dotfiles"
 
-- name: "vim install vundle"
-  git:
-    repo: https://github.com/VundleVim/Vundle.vim.git
-    dest: ~/.vim/bundle/Vundle.vim
-    update: no
-  tags: dotfiles
-
 - name: "init vim configuration"
-  command: vim +PluginInstall +qall
+  command: vim +PlugInstall +qall
   when: vim_config_installed|changed
   tags: dotfiles
 
@@ -69,6 +62,10 @@
 - include: i3.yml
   when: i3|default(false)
 
-- include: vpn_adsnovo.yml
-  when: vpn|default(false)
+- include: vpn_ppp_adsnovo.yml
+  when: vpn.ppp|default(false)
+  tags: vpn
+
+- include: vpn_opvn_adsnovo.yml
+  when: vpn.openvpn|default(false)
   tags: vpn
