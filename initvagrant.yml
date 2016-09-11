@@ -20,7 +20,7 @@
     tags: init
 
   - name: INIT | Install ssh public key from current account
-    authorized_key: user={{ ssh_user}} key="{{ lookup('file','~/.ssh/passwordless_rsa.pub') }}"
+    authorized_key: user={{ ssh_user}} key="{{ lookup('file','~/.ssh/passwordless.pub') }}"
     tags: init
 
   - name: INIT | Install sudoers file for admin accounts

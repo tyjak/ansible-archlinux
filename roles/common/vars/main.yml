@@ -2,7 +2,6 @@
 package:
   - polkit
   - git
-  - git-crypt
   - rxvt-unicode
   - rsync
   - mutt
@@ -21,7 +20,6 @@ nogui_yaourt_package:
   - git-crypt
 
 gui_pacman_package:
-  - gvim
   - rxvt-unicode
   - i3status
   - dunst

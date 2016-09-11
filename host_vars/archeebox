@@ -1,0 +1,15 @@
+---
+hostname: "archeebox"
+keyboard: "pc-fr"
+
+i3:
+  status:
+    network:
+      interface: eth1
+      format_up: "\uf1eb {network_graph}{kbs}kb/s "
+      dynamic_color: true
+      graph_style: braille-fill
+      graph_width: 20
+config:
+  xinitrc:
+    - export BROWSER=/usr/bin/vimb

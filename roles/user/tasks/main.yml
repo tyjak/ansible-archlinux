@@ -32,6 +32,7 @@
   when: gui
   tags: "dotfiles"
 
+#FIXME: pb with initialisation without terminal
 - name: "init vim configuration"
   command: vim +PlugInstall +qall
   when: vim_config_installed|changed
@@ -63,9 +64,9 @@
   when: i3|default(false)
 
 - include: vpn_ppp_adsnovo.yml
-  when: vpn.ppp|default(false)
+  when: vpn is defined and vpn.ppp|default(false)
   tags: vpn
 
 - include: vpn_opvn_adsnovo.yml
-  when: vpn.openvpn|default(false)
+  when: vpn is defined and vpn.openvpn|default(false)
   tags: vpn
