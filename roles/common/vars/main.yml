@@ -2,6 +2,7 @@
 package:
   - polkit
   - git
+  - git-crypt
   - rxvt-unicode
   - rsync
   - mutt
@@ -13,9 +14,11 @@ package:
   - w3m
   - dialog
   - python-pip
-
-nogui_pacman_package:
   - vim
+  - privoxy
+
+nogui_yaourt_package:
+  - git-crypt
 
 gui_pacman_package:
   - gvim

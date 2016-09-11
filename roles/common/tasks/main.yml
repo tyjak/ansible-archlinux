@@ -17,13 +17,14 @@
 
 - include: configure_locale.yml
 
-- include: gui.yml
-  when: gui
-  tags: gui
-
+# no gui yaourt package
 - include: nogui.yml
   when: not gui
   tags: nogui
+
+- include: gui.yml
+  when: gui
+  tags: gui
 
 - include: fonts.yml
   tags: fonts
