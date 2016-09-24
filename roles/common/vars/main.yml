@@ -65,6 +65,7 @@ fonts_package:
   - otf-powerline-symbols-git
   - ttf-inconsolata
   - ttf-liberation
+  - ttf-weather-icons
 #  - ttf-freefont
 #  - fontconfig-infinality
 
