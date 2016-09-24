@@ -1,0 +1,45 @@
+---
+arch_proc: "arm"
+keyboard: "pc-fr"
+vpn:
+  ppp: false
+  openvpn: true
+
+misc_package:
+  - cups
+  - brother-hl2030
+  - firefox
+  - mps-youtube
+  - xf86-input-synaptics
+  - vifm
+  - pulseaudio-raop2
+  - avahi
+  - nss-mdns
+  - paprefs
+  - rtv
+
+theme_package:
+  - gtk-engine-equinox
+  - ambiance-radiance-flat-colors-suite
+
+additional_service:
+  - org.cups.cupsd.service
+  - avahi-daemon.service
+
+i3:
+  status:
+    network:
+      interface: wlan0
+      format_up: "\uf1eb {network_graph}{kbs}KB/s {essid} {quality}%"
+      dynamic_color: True
+      graph_style: braille-fill
+      graph_width: 20
+          vpn:
+            name: ADSNOVO
+
+config:
+  xinitrc:
+    - export BROWSER=/usr/bin/vimb
+    - export PRINTER=Brother_HL_2030_series
+  cupsclient:
+    - 192.168.0.40
