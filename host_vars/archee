@@ -34,8 +34,8 @@ i3:
       dynamic_color: True
       graph_style: braille-fill
       graph_width: 20
-          vpn:
-            name: ADSNOVO
+      vpn:
+        name: ADSNOVO
 
 config:
   xinitrc:
