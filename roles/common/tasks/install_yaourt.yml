@@ -34,7 +34,7 @@
   tags: yaourt
 
 - name: install package-query if not present
-  include: pkg.yml pkg_name=package-query makepkg_nonroot_user={{ lookup('env','USER' }}
+  include: pkg.yml pkg_name=package-query makepkg_nonroot_user={{ lookup('env','USER') }}
   when: package_query_check|failed
   tags: yaourt
 
