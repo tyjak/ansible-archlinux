@@ -34,7 +34,6 @@ gui_pacman_package:
   - gtk3
   - numix-themes
   - xorg-xfontsel
-  - clipmenu
 
 gui_yaourt_packages:
   - python-pywapi
@@ -48,6 +47,7 @@ gui_yaourt_packages:
   - weather
   - gtk-theme-numix-solarized
   - vimb-git
+  - clipmenu
 
 fonts_package:
   - freetype2-infinality

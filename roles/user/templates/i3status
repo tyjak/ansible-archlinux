@@ -14,9 +14,10 @@ status = Status(standalone=True)
 status.register("clock")
 
 # Show sound
-status.register("pulseaudio",
-        format="\U0001D160  {volume}",
-        )
+if os.path.isfile("/etc/pulse/daemon.conf"):
+    status.register("pulseaudio",
+            format="\U0001D160  {volume}",
+            )
 
 # Show battery
 if os.path.isfile("/sys/class/power_supply/BAT0/uevent"):
