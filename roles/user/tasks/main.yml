@@ -19,7 +19,7 @@
     state: link
     src: ~/src/{{ item.src }}
     dest: ~/{{ item.dest }}
-  with_items: link_common_items
+  with_items: "{{ link_common_items }}"
   tags: "dotfiles"
 
 - name: "link gui dot files"
@@ -28,15 +28,15 @@
     src: ~/src/{{ item.src }}
     dest: ~/{{ item.dest }}
     force: yes
-  with_items: link_gui_items
+  with_items: "{{ link_gui_items }}"
   when: gui
   tags: "dotfiles"
 
 #FIXME: pb with initialisation without terminal
-- name: "init vim configuration"
-  command: vim +PlugInstall +qall
-  when: vim_config_installed|changed
-  tags: dotfiles
+#- name: "init vim configuration"
+#command: vim +PlugInstall +qall
+#when: vim_config_installed|changed
+#tags: dotfiles
 
 - name: vimfile backup dir
   file: path=~/.vimfiles/bak state=directory recurse=yes
@@ -46,6 +46,7 @@
   file: path=~/.vimfiles/undo state=directory
   tags: dotfiles
 
+#FIXME some config (vimb) depends on share folder, that shouldn't be
 - name: enable syncthing
   command: systemctl --user enable syncthing.service
   register: enable_syncthing

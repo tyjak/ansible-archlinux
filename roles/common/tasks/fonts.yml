@@ -3,13 +3,13 @@
 - name: get new fonts to install
   command: yaourt -Q {{ item }}
   register: fonts_presence
-  with_items: fonts_package
+  with_items: "{{ fonts_package }}"
   changed_when: fonts_presence|failed
   ignore_errors: yes
 
 - name: install fonts package
   sudo: no
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
-  with_items: fonts_presence.results
+  with_items: "{{ fonts_presence.results }}"
   when: item|failed
   ignore_errors: yes

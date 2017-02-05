@@ -7,7 +7,7 @@
 - name: install base package
   sudo: yes
   pacman: name={{ item }}
-  with_items: package
+  with_items: "{{ package }}"
 
 # infinalty add repo
 #- include: configure_pacman.yml
@@ -30,7 +30,7 @@
   tags: fonts
 
 - name: has wifi ?
-  shell: dmesg | grep "WLAN"
+  shell: dmesg | grep -i "wlan"
   register: has_wifi
   changed_when: has_wifi|success
   ignore_errors: true
@@ -45,16 +45,16 @@
 - name: get host misc packages
   command: yaourt -Q {{ item }}
   register: misc_presence
-  with_items: misc_package
+  with_items: "{{ misc_package }}"
   changed_when: misc_presence|failed
-  when: misc_package|default(false)
+  when: misc_package is defined
   ignore_errors: yes
   tags: misc
 
 - name: install host misc package
   sudo: no
   command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
-  with_items: misc_presence.results
+  with_items: "{{ misc_presence.results }}"
   when: item|failed
   ignore_errors: yes
   tags: misc
@@ -62,7 +62,7 @@
 - name: enable host additional service
   sudo: yes
   service: name={{ item }} state=started enabled=yes
-  with_items: additional_service
+  with_items: "{{ additional_service }}"
   when: misc_presence.changed
   tags: misc
 

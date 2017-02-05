@@ -15,6 +15,7 @@ package:
   - python-pip
   - vim
   - privoxy
+  - termite
 
 nogui_yaourt_package:
   - git-crypt
