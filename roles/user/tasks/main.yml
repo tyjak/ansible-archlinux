@@ -3,6 +3,7 @@
   git:
     repo: http://github.com/tyjak/archlinux
     dest: ~/src/archlinux
+    remote: archlinux_branch
     update: no
   tags: "dotfiles"
 

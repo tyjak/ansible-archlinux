@@ -1,0 +1,6 @@
+---
+arch_proc: "arm"
+keyboard: "pc-fr"
+vpn:
+  ppp: false
+  openvpn: false

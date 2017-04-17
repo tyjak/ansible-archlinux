@@ -1,0 +1,26 @@
+---
+keyboard: "pc-fr"
+vpn:
+  ppp: false
+  openvpn: false
+
+misc_package:
+  - cups
+  - brother-hl2030
+  - lxdm
+  - firefox
+  - xf86-input-synaptics
+  - pulseaudio-raop2
+  - avahi
+  - paprefs
+
+additional_service:
+  - org.cups.cupsd.service
+  - avahi-daemon.service
+
+config:
+  xinitrc:
+    - export BROWSER=/usr/bin/vimb
+    - export PRINTER=Brother_HL_2030_series
+  cupsclient:
+    - 192.168.0.40

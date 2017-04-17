@@ -49,6 +49,9 @@ gui_yaourt_packages:
   - gtk-theme-numix-solarized
   - vimb-git
   - clipmenu
+  - basiciw
+  - python-basiciw
+  - urlview
 
 fonts_package:
   - freetype2-infinality
