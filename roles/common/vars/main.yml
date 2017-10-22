@@ -16,6 +16,7 @@ package:
   - vim
   - privoxy
   - termite
+  - pass
 
 nogui_yaourt_package:
   - git-crypt
@@ -70,6 +71,7 @@ fonts_package:
   - ttf-inconsolata
   - ttf-liberation
   - ttf-weather-icons
+  - vim-devicons
 #  - ttf-freefont
 #  - fontconfig-infinality
 

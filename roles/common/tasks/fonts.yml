@@ -13,3 +13,17 @@
   with_items: "{{ fonts_presence.results }}"
   when: item|failed
   ignore_errors: yes
+  #
+  #- name: create user fonts dir
+  #  file:
+  #    path: ~/.local/share/fonts
+  #    state: directory
+  #    recurse: yes
+  #  tags: meslo
+  #
+  #- name: install specific Nerd fonts
+  #  get_url:
+  #    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/S-DZ/complete/Meslo%20LG%20S%20DZ%20Regular%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
+  #    dest: "~/.local/share/fonts/Meslo LG S DZ Regular for Powerline Nerd Font Complete Mono.otf"
+  #  tags: meslo
+  #

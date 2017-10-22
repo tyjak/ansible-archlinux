@@ -39,7 +39,7 @@
   sudo: yes
   lineinfile:
     dest: /etc/slim.conf
-    regexp: "{{ item.regexp }}"
+    regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     backrefs: yes
   with_items:
