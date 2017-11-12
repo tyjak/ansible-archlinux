@@ -16,6 +16,8 @@ package:
   - vim
   - privoxy
   - termite
+  - gnupg
+  - pinentry
   - pass
 
 nogui_yaourt_package:
@@ -36,6 +38,7 @@ gui_pacman_package:
   - gtk3
   - numix-themes
   - xorg-xfontsel
+  - udiskie
 
 gui_yaourt_packages:
   - python-pywapi
