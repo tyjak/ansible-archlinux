@@ -2,7 +2,7 @@
 # install gui packages
 
 - name: install pacman gui package
-  sudo: yes
+  become: true
   pacman: name={{ item }}
   with_items: "{{ gui_pacman_package }}"
 
@@ -15,7 +15,7 @@
   tags: test
 
 - name: install yaourt packages
-  sudo: no
+  become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   when: item|failed
   with_items: "{{ packages_presence.results }}"
@@ -31,7 +31,7 @@
   tags: theme
 
 - name: install theme package
-  sudo: no
+  become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   with_items: "{{ theme_presence.results }}"
   when: item|failed

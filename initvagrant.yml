@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: yes
+  become: true
   tags: init
   vars:
   - ssh_user: "{{ lookup('env','USER') }}"

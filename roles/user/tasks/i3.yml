@@ -1,6 +1,6 @@
 ---
 - name: if wifi install basiciw for i3 status
-  sudo: yes
+  become: true
   pip: name=basiciw
   when: has_wifi|default(false) and has_wifi.changed|default(false)
   tags: i3

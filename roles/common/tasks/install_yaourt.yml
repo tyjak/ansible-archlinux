@@ -15,7 +15,7 @@
   tags: yaourt
 
 - name: install binutils
-  sudo: yes
+  become: true
   pacman: name=binutils state=latest update_cache=yes
   when: package_binutils|failed
   tags: yaourt
@@ -28,7 +28,7 @@
   tags: yaourt
 
 - name: install base-devel
-  sudo: yes
+  become: true
   pacman: name=base-devel state=latest update_cache=yes
   when: package_gcc|failed
   tags: yaourt
@@ -39,7 +39,7 @@
   tags: yaourt
 
 - name: test if yaourt installed
-  sudo: yes
+  become: true
   command: /usr/bin/pacman -Q yaourt
   register: yaourt_check
   changed_when: yaourt_check|failed
@@ -47,7 +47,7 @@
   tags: yaourt
 
 - name: Add repository to install yaourt if not present
-  sudo: yes
+  become: true
   lineinfile:
     dest: /etc/pacman.conf
     state: present
@@ -60,5 +60,5 @@
   tags: yaourt
 
 - name: Install yaourt
-  sudo: yes
+  become: true
   pacman: name=yaourt state=present update_cache=yes

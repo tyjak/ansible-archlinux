@@ -9,7 +9,7 @@
   tags: vpn
 
 - name: install vpn package
-  sudo: no
+  become: false
   command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
   with_items: vpn_presence.results
   when: item|failed and gui

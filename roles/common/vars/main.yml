@@ -19,6 +19,9 @@ package:
   - gnupg
   - pinentry
   - pass
+  - python-neovim 
+  - ripgrep
+
 
 nogui_yaourt_package:
   - git-crypt
@@ -36,7 +39,6 @@ gui_pacman_package:
   - cairo
   - gtk2
   - gtk3
-  - numix-themes
   - xorg-xfontsel
   - udiskie
 
@@ -50,20 +52,25 @@ gui_yaourt_packages:
   - dmenu2
 #  - htop-vim-solarized-git
   - weather
-  - gtk-theme-numix-solarized
   - vimb-git
   - clipmenu
   - basiciw
   - python-basiciw
   - urlview
+  - adwaita-icon-theme
+  - gtk-theme-numix-solarized-git
+  - git-crypt
+  - libvpx
+  - gst-libav
+  - gst-plugins-good
 
 fonts_package:
-  - freetype2-infinality
+  - freetype2
   - xorg-xfontsel
   - terminus-font
   - terminus-font-ttf
   - ttf-dejavu
-  - otf-inconsolata-dz-powerline-git
+  - otf-inconsolata-powerline-git
   - otf-powerline-symbols-git
   - otf-texgyre
   - ttf-mac-fonts
@@ -74,6 +81,7 @@ fonts_package:
   - ttf-inconsolata
   - ttf-liberation
   - ttf-weather-icons
+  - ttf-font-icons
   - vim-devicons
 #  - ttf-freefont
 #  - fontconfig-infinality

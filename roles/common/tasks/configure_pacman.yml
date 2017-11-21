@@ -1,14 +1,14 @@
 # Add infinality
 ---
 - name: "test infinality configured"
-  sudo: yes
+  become: true
   shell: "grep 'infinality' /etc/pacman.conf" 
   register: infinality_configured
   changed_when: infinality_configured|failed
   ignore_errors: yes
 
 - name: "add infinality-bundle" # https://wiki.archlinux.org/index.php/Unofficial_user_repositories#infinality-bundle
-  sudo: yes
+  become: true
   lineinfile:
     dest: "/etc/pacman.conf"
     state: present
@@ -21,13 +21,13 @@
   when: infinality_configured|failed
 
 - name: "test pacman add key since bug gpg"
-  sudo: yes
+  become: true
   shell: "pacman-key -r 962DDE58 && pacman-key --lsign-key 962DDE58"
   register: pacmankey_success
   ignore_errors: true
 
 - name: "fix pacmankey if necessary"
-  sudo: yes
+  become: true
   shell: "dirmngr < /dev/null"
   when: pacmankey_success|failed
 

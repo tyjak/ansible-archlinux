@@ -5,7 +5,7 @@
   tags: yaourt
 
 - name: configure keyboard
-  sudo: yes
+  become: true
   copy: src=00-keyboard-mac-azerty.conf dest=/etc/X11/xorg.conf.d/00-keyboard.conf
   when: keyboard|default(False) == 'mac-azerty'
   tags: keyboard
@@ -18,25 +18,25 @@
   tags: bluetooth
 
 - name: install bluetooth
-  sudo: yes
+  become: true
   pacman: name=bluez,bluez-utils,dbus,blueman state=present
   when: has_bluetooth|success
   tags: bluetooth
 
 - name: up bluetooth device on start
-  sudo: yes
+  become: true
   copy: src=10-local.rules dest=/etc/udev/rules.d/10-local.rules
   when: has_bluetooth|success
   tags: bluetooth
 
 - name: enable bluetooth on start
-  sudo: yes
+  become: true
   service: name=bluetooth state=started enabled=yes
   when: has_bluetooth|success
   tags: bluetooth
 
 - name: configure slim
-  sudo: yes
+  become: true
   lineinfile:
     dest: /etc/slim.conf
     regexp: "{{ item.regexp }}"
@@ -48,9 +48,9 @@
     - { regexp: '^current_theme.*default$', line: 'current_theme  archlinux-solarized' }
 
 - name: install slim theme
-  sudo: yes
+  become: true
   git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
   
 - name: enable slim at boot
-  sudo: yes
+  become: true
   service: name=slim enabled=yes

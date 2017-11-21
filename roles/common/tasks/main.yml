@@ -1,11 +1,11 @@
 ---
 # pacman base package
 - name: update and upgrade
-  sudo: yes
+  become: true
   pacman: update_cache=yes
 
 - name: install base package
-  sudo: yes
+  become: true
   pacman: name={{ item }}
   with_items: "{{ package }}"
 
@@ -37,7 +37,7 @@
   tags: wifi
 
 - name: install wifi
-  sudo: yes
+  become: true
   pacman: name=wpa_supplicant state=present
   when: has_wifi|success
   tags: wifi
@@ -52,7 +52,7 @@
   tags: misc
 
 - name: install host misc package
-  sudo: no
+  become: false
   command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
   with_items: "{{ misc_presence.results }}"
   when: item|failed
@@ -60,7 +60,7 @@
   tags: misc
 
 - name: enable host additional service
-  sudo: yes
+  become: true
   service: name={{ item }} state=started enabled=yes
   with_items: "{{ additional_service }}"
   when: misc_presence.changed

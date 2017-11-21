@@ -9,7 +9,7 @@
   changed_when: packages_presence|failed
 
 - name: install yaourt packages
-  sudo: no
+  become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   when: item|failed
   with_items: packages_presence.results

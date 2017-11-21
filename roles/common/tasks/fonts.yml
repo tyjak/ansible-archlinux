@@ -8,7 +8,7 @@
   ignore_errors: yes
 
 - name: install fonts package
-  sudo: no
+  become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   with_items: "{{ fonts_presence.results }}"
   when: item|failed
