@@ -3,7 +3,7 @@ archlinux_branch: "macbook"
 keyboard: "mac-azerty"
 vpn:
   ppp: false
-  openvpn: false
+  openvpn: true
 
 misc_package:
   - cups

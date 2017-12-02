@@ -5,17 +5,24 @@
   pacman: name=openvpn
 
 - name: test if adsnovo config is present
-  stat: path=/etc/openvpn/adsnovo.conf
+  become: true
+  stat: path=/etc/openvpn/client/adsnovo.conf
   register: adsnovo_conf
+
+- name: copy adsnovo config
+  become: true
+  copy: src=vpn/adsnovo_openvpn.vault dest=/etc/openvpn/adsnovo_openvpn.tar.gz
+  when: adsnovo_conf.stat.exists == False
+  tags: vpn
 
 - name: copy and install adsnovo config
   become: true
-  shell: 'ansible-vault decrypt --output=/etc/openvpn/adsnovo_openvpn.tar.gz roles/user/files/vpn/adsnovo_openvpn.vault && cd /etc/openvpn && tar -xzf adsnovo_openvpn.tar.gz && rm adsnovo_openvpn.tar.gz'
+  unarchive: src=/etc/openvpn/adsnovo_openvpn.tar.gz dest=/etc/openvpn/client/ remote_src=yes
   when: adsnovo_conf.stat.exists == False
   tags: vpn
 
 - name: enable adsnovo vpn service
   become: true
-  service: name=openvpn@adsnovo enabled=yes
+  service: name=openvpn-client@adsnovo enabled=yes
   tags: vpn
 
