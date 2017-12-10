@@ -36,7 +36,7 @@
 - name: AUR | {{ pkg_name }} | build package, including missing dependencies
   when: extracted_pkg | changed
   become: true
-  sudo_user: "{{ makepkg_nonroot_user }}"
+  become_user: "{{ makepkg_nonroot_user }}"
   command: >
     makepkg --noconfirm --noprogressbar -mfs
     chdir=/tmp/{{ pkg_name }}
