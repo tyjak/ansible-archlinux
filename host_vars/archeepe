@@ -1,0 +1,13 @@
+---
+keyboard: "pc-fr"
+vpn:
+  ppp: false
+  openvpn: false
+
+misc_package:
+  - cups
+  - firefox
+
+additional_service:
+  - org.cups.cupsd.service
+

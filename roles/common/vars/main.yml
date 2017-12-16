@@ -13,7 +13,6 @@ package:
   - w3m
   - dialog
   - python-pip
-  - vim
   - privoxy
   - termite
   - gnupg
@@ -21,10 +20,11 @@ package:
   - pass
   - python-neovim 
   - ripgrep
-
+  - fzf
 
 nogui_yaourt_package:
   - git-crypt
+  - vim
 
 gui_pacman_package:
   - rxvt-unicode
@@ -41,6 +41,7 @@ gui_pacman_package:
   - gtk3
   - xorg-xfontsel
   - udiskie
+  - gvim
 
 gui_yaourt_packages:
   - python-pywapi
@@ -58,11 +59,14 @@ gui_yaourt_packages:
   - python-basiciw
   - urlview
   - adwaita-icon-theme
+# WARNING numix install inkscape and doesn't remove it TODO: remove inkscape
   - gtk-theme-numix-solarized-git
   - git-crypt
   - libvpx
   - gst-libav
   - gst-plugins-good
+  - vimiv
+  - wuzz
 
 fonts_package:
   - freetype2
