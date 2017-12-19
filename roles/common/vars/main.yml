@@ -50,6 +50,7 @@ gui_yaourt_packages:
   - python-psutil
   - i3-git
   - i3pystatus-git
+  - i3lock
   - dmenu2
 #  - htop-vim-solarized-git
   - weather
@@ -67,6 +68,7 @@ gui_yaourt_packages:
   - gst-plugins-good
   - vimiv
   - wuzz
+  - maim
 
 fonts_package:
   - freetype2

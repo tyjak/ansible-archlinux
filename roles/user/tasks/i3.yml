@@ -13,3 +13,6 @@
   notify: restart i3
   tags: i3
 
+- name: add Pictures folder for screenshot capture command (defined in i3 conf)
+  file: path=~/Pictures state state=directory
+  tags: i3
