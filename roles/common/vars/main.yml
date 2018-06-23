@@ -21,6 +21,7 @@ package:
   - python-neovim 
   - ripgrep
   - fzf
+  - xdotool
 
 nogui_yaourt_package:
   - git-crypt
