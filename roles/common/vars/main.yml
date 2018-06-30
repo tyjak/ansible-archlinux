@@ -1,5 +1,6 @@
 ---
 package:
+  - ntp
   - polkit
   - git
   - rxvt-unicode
