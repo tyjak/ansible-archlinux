@@ -44,6 +44,7 @@ gui_pacman_package:
   - xorg-xfontsel
   - udiskie
   - gvim
+  - quickswitch-i3
 
 gui_yaourt_packages:
   - python-pywapi
