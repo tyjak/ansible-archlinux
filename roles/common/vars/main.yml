@@ -29,6 +29,7 @@ package:
 nogui_yaourt_package:
   - git-crypt
   - vim
+  - yq
 
 gui_pacman_package:
   - rxvt-unicode
@@ -59,8 +60,9 @@ gui_yaourt_packages:
   - dmenu2
 #  - htop-vim-solarized-git
   - weather
-  - vimb-git
+  - vimb
   - clipmenu
+  - quickswitch-i3
   - basiciw
   - python-basiciw
   - urlview
@@ -74,6 +76,8 @@ gui_yaourt_packages:
   - vimiv
   - wuzz
   - maim
+  - browserpass
+  - urlscan
 
 fonts_package:
   - freetype2
