@@ -22,7 +22,9 @@ package:
   - python-neovim 
   - ripgrep
   - fzf
+  - fd
   - xdotool
+  - ranger
 
 nogui_yaourt_package:
   - git-crypt
