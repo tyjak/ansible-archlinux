@@ -6,7 +6,7 @@
   tags: i3
 
 - name: configure i3 status
-  template: 
+  template:
     src: i3status
     dest: ~/.config/i3/status.py
   when: i3.status|default(false)
@@ -14,5 +14,5 @@
   tags: i3
 
 - name: add Pictures folder for screenshot capture command (defined in i3 conf)
-  file: path=~/Pictures state state=directory
+  file: path=~/Pictures state=directory
   tags: i3

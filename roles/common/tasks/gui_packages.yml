@@ -3,21 +3,20 @@
 
 - name: install pacman gui package
   become: true
-  pacman: name={{ item }}
-  with_items: "{{ gui_pacman_package }}"
+  pacman: name={{ gui_pacman_package }}
 
 - name: get new packages to install
   command: yaourt -Q {{ item }}
   register: packages_presence
   with_items: "{{ gui_yaourt_packages }}"
   ignore_errors: yes
-  changed_when: packages_presence|failed
+  changed_when: packages_presence is failed
   tags: test
 
 - name: install yaourt packages
   become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
-  when: item|failed
+  when: item is failed
   with_items: "{{ packages_presence.results }}"
   ignore_errors: yes
 
@@ -26,7 +25,7 @@
   register: theme_presence
   with_items: "{{ theme_package }}"
   when: theme_package is defined
-  changed_when: theme_presence|failed
+  changed_when: theme_presence is failed
   ignore_errors: yes
   tags: theme
 
@@ -34,7 +33,7 @@
   become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
   with_items: "{{ theme_presence.results }}"
-  when: item|failed
+  when: item is failed
   ignore_errors: yes
   tags: theme
 

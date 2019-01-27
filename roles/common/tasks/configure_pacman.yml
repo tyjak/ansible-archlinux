@@ -4,7 +4,7 @@
   become: true
   shell: "grep 'infinality' /etc/pacman.conf" 
   register: infinality_configured
-  changed_when: infinality_configured|failed
+  changed_when: infinality_configured is failed
   ignore_errors: yes
 
 - name: "add infinality-bundle" # https://wiki.archlinux.org/index.php/Unofficial_user_repositories#infinality-bundle
@@ -18,7 +18,7 @@
     - line: "Server = http://bohoomil.com/repo/$arch"
     - line: "[infinality-bundle-fonts]"
     - line: "Server = http://bohoomil.com/repo/fonts"
-  when: infinality_configured|failed
+  when: infinality_configured is failed
 
 - name: "test pacman add key since bug gpg"
   become: true
@@ -29,7 +29,7 @@
 - name: "fix pacmankey if necessary"
   become: true
   shell: "dirmngr < /dev/null"
-  when: pacmankey_success|failed
+  when: pacmankey_success is failed
 
 - name: "add infinality-bundle key"
   shell: "sudo pacman-key --init && sudo pacman-key -r 962DDE58 && sudo pacman-key --lsign-key 962DDE58"

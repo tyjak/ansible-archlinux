@@ -6,12 +6,12 @@
   register: packages_presence
   with_items: nogui_yaourt_packages
   ignore_errors: yes
-  changed_when: packages_presence|failed
+  changed_when: packages_presence is is failed
 
 - name: install yaourt packages
   become: false
   command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
-  when: item|failed
+  when: item is failed
   with_items: packages_presence.results
   ignore_errors: yes
-  
+

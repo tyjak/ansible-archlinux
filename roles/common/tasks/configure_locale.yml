@@ -31,15 +31,15 @@
 - name: locale gen
   become: true
   command: locale-gen
-  when: has_configured|failed
+  when: has_configured is failed
 
 - name: set system locale
   become: true
   command: "localectl set-locale LANG=fr_FR.UTF-8"
-  when: has_configured|failed
+  when: has_configured is failed
 
 - name: set keyboard
   become: true
   command: "localectl set-keymap --no-convert fr"
-  when: has_configured|failed
+  when: has_configured is failed
 

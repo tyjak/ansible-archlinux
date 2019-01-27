@@ -3,62 +3,73 @@
 - name: test if package-query installed
   command: /usr/bin/pacman -Q package-query
   register: package_query_check
-  changed_when: package_query_check|failed
+  changed_when: package_query_check is failed
   ignore_errors: true
   tags: yaourt
 
 - name: test if binutils installed
   command: /usr/bin/pacman -Q binutils
   register: package_binutils
-  changed_when: package_binutils|failed
+  changed_when: package_binutils is failed
   ignore_errors: true
   tags: yaourt
 
 - name: install binutils
   become: true
   pacman: name=binutils state=latest update_cache=yes
-  when: package_binutils|failed
+  when: package_binutils is failed
   tags: yaourt
 
 - name: test if gcc installed
   command: /usr/bin/pacman -Q bison
   register: package_gcc
-  changed_when: package_gcc|failed
+  changed_when: package_gcc is failed
   ignore_errors: true
   tags: yaourt
 
 - name: install base-devel
   become: true
   pacman: name=base-devel state=latest update_cache=yes
-  when: package_gcc|failed
+  when: package_gcc is failed
   tags: yaourt
 
 - name: install package-query if not present
-  include: pkg.yml pkg_name=package-query makepkg_nonroot_user={{ lookup('env','USER') }}
-  when: package_query_check|failed
+  import_tasks: pkg.yml
+  vars:
+    pkg_name: package-query
+    makepakg_nonroot_user: "{{ lookup('env','USER') }}"
+  when: package_query_check is failed
   tags: yaourt
 
 - name: test if yaourt installed
   become: true
   command: /usr/bin/pacman -Q yaourt
   register: yaourt_check
-  changed_when: yaourt_check|failed
+  changed_when: yaourt_check is failed
   ignore_errors: true
   tags: yaourt
 
-- name: Add repository to install yaourt if not present
-  become: true
-  lineinfile:
-    dest: /etc/pacman.conf
-    state: present
-    line: "{{ item.line }}"
-  with_items:
-    - line: '[archlinuxfr]'
-    - line: 'SigLevel = Never'
-    - line: "Server = http://repo.archlinux.fr/{{ arch_proc }}"
-  when: yaourt_check|failed
+- name: install package-query if not present
+  import_tasks: pkg.yml
+  vars:
+    pkg_name: yaourt
+    makepakg_nonroot_user: "{{ lookup('env','USER') }}"
+  when: yaourt_check is failed
   tags: yaourt
 
-- name: Install yaourt
-  become: true
-  pacman: name=yaourt state=present update_cache=yes
+  #- name: Add repository to install yaourt if not present
+  #  become: true
+  #  lineinfile:
+  #    dest: /etc/pacman.conf
+  #    state: present
+  #    line: "{{ item.line }}"
+  #  with_items:
+  #    - line: '[archlinuxfr]'
+  #    - line: 'SigLevel = Never'
+  #    - line: "Server = http://repo.archlinux.fr/{{ arch_proc }}"
+  #  when: yaourt_check is failed
+  #  tags: yaourt
+  #
+  #- name: Install yaourt
+  #  become: true
+  #  pacman: name=yaourt state=present update_cache=yes

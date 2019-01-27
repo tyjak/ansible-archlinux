@@ -2,8 +2,8 @@
 hostname: "vultr"
 keyboard: "pc-fr"
 
-misc_package:
-  - rtorrent
-additional_service:
-  - rtorrent.service
-
+#misc_package:
+#  - rtorrent
+#additional_service:
+#  - rtorrent.service
+#

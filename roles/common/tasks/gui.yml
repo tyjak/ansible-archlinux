@@ -1,7 +1,7 @@
 ---
 
 # packages 
-- include: gui_packages.yml
+- import_tasks: gui_packages.yml
   tags: yaourt
 
 - name: configure keyboard
@@ -13,26 +13,26 @@
 - name: has bluetooth ?
   shell: "lsusb | grep -i bluetooth"
   register: has_bluetooth
-  changed_when: has_bluetooth|success
+  changed_when: has_bluetooth is success
   ignore_errors: yes
   tags: bluetooth
 
 - name: install bluetooth
   become: true
   pacman: name=bluez,bluez-utils,dbus,blueman state=present
-  when: has_bluetooth|success
+  when: has_bluetooth is success
   tags: bluetooth
 
 - name: up bluetooth device on start
   become: true
   copy: src=10-local.rules dest=/etc/udev/rules.d/10-local.rules
-  when: has_bluetooth|success
+  when: has_bluetooth is success
   tags: bluetooth
 
 - name: enable bluetooth on start
   become: true
   service: name=bluetooth state=started enabled=yes
-  when: has_bluetooth|success
+  when: has_bluetooth is success
   tags: bluetooth
 
 - name: configure slim

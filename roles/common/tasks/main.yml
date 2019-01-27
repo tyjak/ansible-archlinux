@@ -6,51 +6,43 @@
 
 - name: install base package
   become: true
-  pacman: name={{ item }}
-  with_items: "{{ package }}"
+  pacman: name={{ package }}
 
-# infinalty add repo
-#- include: configure_pacman.yml
-
-# install yaourt
-- include: install_yaourt.yml
-
-- include: configure_locale.yml
+# - import_tasks: configure_pacman.yml
+- import_tasks: install_yaourt.yml
+- import_tasks: configure_locale.yml
 
 - name: refresh key
   become: true
   command: pacman-key --refresh-keys
 
-# no gui yaourt package
-- include: nogui.yml
+- import_tasks: nogui.yml
   when: not gui
   tags: nogui
-
-- include: gui.yml
+- import_tasks: gui.yml
   when: gui
   tags: gui
-
-- include: fonts.yml
+- import_tasks: fonts.yml
   tags: fonts
 
 - name: has wifi ?
   shell: dmesg | grep -i "wlan"
   register: has_wifi
-  changed_when: has_wifi|success
+  changed_when: has_wifi is success
   ignore_errors: true
   tags: wifi
 
 - name: install wifi
   become: true
   pacman: name=wpa_supplicant state=present
-  when: has_wifi|success
+  when: has_wifi is success
   tags: wifi
 
 - name: get host misc packages
   command: yaourt -Q {{ item }}
   register: misc_presence
   with_items: "{{ misc_package }}"
-  changed_when: misc_presence|failed
+  changed_when: misc_presence is failed
   when: misc_package is defined
   ignore_errors: yes
   tags: misc
@@ -59,7 +51,7 @@
   become: false
   command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
   with_items: "{{ misc_presence.results }}"
-  when: item|failed
+  when: item is failed
   ignore_errors: yes
   tags: misc
 
@@ -70,5 +62,5 @@
   when: misc_presence.changed
   tags: misc
 
-  #- include: install_vpn.yml
+  #- import_tasks: install_vpn.yml
   #  tags: vpn

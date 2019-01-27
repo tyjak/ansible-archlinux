@@ -1,4 +1,4 @@
 ---
 # installation 
-- include: init.yml
-- include: install.yml
+- import_playbook: init.yml
+- import_playbook: install.yml

@@ -51,24 +51,24 @@
 - name: enable syncthing
   command: systemctl --user enable syncthing.service
   register: enable_syncthing
-  changed_when: enable_syncthing|success
+  changed_when: enable_syncthing is success
   tags: syncthing
 
 - name: start syncthing
   command: systemctl --user start syncthing.service
-  when: enable_syncthing|success
+  when: enable_syncthing is success
   tags: syncthing
 
-- include: config.yml
+- import_tasks: config.yml
   when: config|default(false)
 
-- include: i3.yml
+- import_tasks: i3.yml
   when: i3|default(false)
 
-- include: vpn_ppp_adsnovo.yml
+- import_tasks: vpn_ppp_adsnovo.yml
   when: vpn is defined and vpn.ppp|default(false)
   tags: vpn
 
-- include: vpn_opvn_adsnovo.yml
+- import_tasks: vpn_opvn_adsnovo.yml
   when: vpn is defined and vpn.openvpn|default(false)
   tags: vpn
