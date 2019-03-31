@@ -19,7 +19,7 @@ package:
   - gnupg
   - pinentry
   - pass
-  - python-neovim 
+  - python-neovim
   - ripgrep
   - fzf
   - fd
