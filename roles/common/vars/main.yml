@@ -26,6 +26,7 @@ package:
   - xdotool
   - ranger
   - dictd
+  - gotop
 
 nogui_yaourt_package:
   - git-crypt
