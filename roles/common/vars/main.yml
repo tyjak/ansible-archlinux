@@ -25,6 +25,7 @@ package:
   - fd
   - xdotool
   - ranger
+  - dictd
 
 nogui_yaourt_package:
   - git-crypt
@@ -77,6 +78,7 @@ gui_yaourt_packages:
   - wuzz
   - maim
   - browserpass
+  - passmenud
   - urlscan
 
 fonts_package:
