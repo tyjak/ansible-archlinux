@@ -1,0 +1,18 @@
+---
+- name: test if yay installed
+  stat:
+    path: /usr/bin/yay
+  register: yay_installed
+  tags: yay
+
+- name: clone yay repo
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /tmp/yay
+  tags: yay
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: build and deploy
+  shell: cd /tmp/yay && makepkg -si
+  when: not yay_installed.stat.exists
+  tags: yay

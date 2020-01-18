@@ -1,32 +1,32 @@
 ---
-package:
+base_package:
   - ntp
-  - polkit
+  - iftop
+  - htop
+  - zsh
   - git
-  - rxvt-unicode
+
+package:
+  - polkit
   - rsync
   - mutt
-  - htop
-  - iftop
   - tmux
-  - zsh
   - syncthing
   - w3m
   - dialog
   - python-pip
   - privoxy
-  - termite
   - gnupg
   - pinentry
   - pass
   - python-neovim
   - ripgrep
   - fzf
-  - fd
-  - xdotool
   - ranger
   - dictd
+  - fd
   - gotop
+  - termite
 
 nogui_yaourt_package:
   - git-crypt
@@ -34,6 +34,7 @@ nogui_yaourt_package:
   - yq
 
 gui_pacman_package:
+  - xdotool
   - rxvt-unicode
   - dunst
   - feh

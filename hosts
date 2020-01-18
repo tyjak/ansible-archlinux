@@ -1,11 +1,14 @@
 # servers with nogui
+[minimal]
+alarmpi ansible_python_interpreter=/usr/bin/python
+
 [cloud]
 do2
 vultr
 archeesw
 
+#servers with gui
 [ground]
-alarmpi
 archee
 archeebox
 asus

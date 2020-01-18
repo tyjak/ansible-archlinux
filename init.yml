@@ -1,6 +1,6 @@
 - hosts: all
-  user: root
-  become: false
+  become: true
+  become_method: su
   tags: init
   vars:
   - ssh_user: "{{ lookup('env','USER') }}"
@@ -15,9 +15,9 @@
     tags: init
 
   - name: INIT | Make sure essential software is installed
-    pacman: name={{ item }} state=latest
-    with_items:
-    - sudo
+    pacman:
+      name: sudo
+      state: present
     tags: init
 
   - name: INIT | Install ssh public key from current account

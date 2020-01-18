@@ -6,11 +6,17 @@
 
 - name: install base package
   become: true
-  pacman: name={{ package }}
+  pacman: name={{ base_package }}
 
-# - import_tasks: configure_pacman.yml
-- import_tasks: install_yaourt.yml
+- name: install common package
+  become: true
+  pacman: name={{ base_package }}
+  when: install is undefined or install!='minimal'
+
 - import_tasks: configure_locale.yml
+
+- import_tasks: install_yay.yml
+  when: install is undefined or install!='minimal'
 
 - name: refresh key
   become: true
@@ -23,6 +29,7 @@
   when: gui
   tags: gui
 - import_tasks: fonts.yml
+  when: gui
   tags: fonts
 
 - name: has wifi ?
@@ -38,8 +45,14 @@
   when: has_wifi is success
   tags: wifi
 
+- name: install host pacman misc packages
+  become: true
+  pacman: name={{ pacman_misc_package }}
+  when: pacman_misc_package is defined
+  tags: misc
+
 - name: get host misc packages
-  command: yaourt -Q {{ item }}
+  command: yay -Q {{ item }}
   register: misc_presence
   with_items: "{{ misc_package }}"
   changed_when: misc_presence is failed
@@ -49,7 +62,7 @@
 
 - name: install host misc package
   become: false
-  command: /usr/bin/yaourt --noconfirm --force -S {{ item.item }}
+  command: /usr/bin/yay --noconfirm -S {{ item.item }}
   with_items: "{{ misc_presence.results }}"
   when: item is failed
   ignore_errors: yes

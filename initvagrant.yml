@@ -1,4 +1,5 @@
 - hosts: all
+  user: vagrant
   become: true
   tags: init
   vars:
@@ -19,9 +20,9 @@
     - sudo
     tags: init
 
-#  - name: INIT | Install ssh public key from current account
-#    authorized_key: user={{ ssh_user}} key="{{ lookup('file','~/.ssh/passwordless.pub') }}"
-#    tags: init
+  - name: INIT | Install ssh public key from current account
+    authorized_key: user={{ ssh_user}} key="{{ lookup('file','~/.ssh/id_rsa.pub') }}"
+    tags: init
 
   - name: INIT | Install sudoers file for admin accounts
     lineinfile: "dest=/etc/sudoers.d/admins state=present create=yes regexp='^%admins' line='%admins ALL=(ALL:ALL) NOPASSWD: SETENV: ALL' owner=root group=root mode=0440"

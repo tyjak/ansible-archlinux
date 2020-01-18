@@ -3,5 +3,7 @@
 - hosts: all
   roles:
   - common
-  - user
 
+- hosts: cloud, ground
+  roles:
+  - user
