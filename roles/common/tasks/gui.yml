@@ -2,7 +2,7 @@
 
 # packages 
 - import_tasks: gui_packages.yml
-  tags: yaourt
+  tags: pkg,aur
 
 - name: configure keyboard
   become: true
@@ -19,7 +19,7 @@
 
 - name: install bluetooth
   become: true
-  pacman: name=bluez,bluez-utils,dbus,blueman state=present
+  pacman: name=bluez,bluez-utils,dbus,blueman,blueberry state=present
   when: has_bluetooth is success
   tags: bluetooth
 

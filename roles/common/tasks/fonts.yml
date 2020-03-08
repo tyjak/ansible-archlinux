@@ -1,7 +1,7 @@
 ---
   
 - name: get new fonts to install
-  command: yaourt -Q {{ item }}
+  command: yay -Q {{ item }}
   register: fonts_presence
   with_items: "{{ fonts_package }}"
   changed_when: fonts_presence is failed
@@ -9,7 +9,7 @@
 
 - name: install fonts package
   become: false
-  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
+  command: /usr/bin/yay --noconfirm -S {{ item.item }}
   with_items: "{{ fonts_presence.results }}"
   when: item is failed
   ignore_errors: yes

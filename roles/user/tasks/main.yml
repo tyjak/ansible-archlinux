@@ -1,4 +1,23 @@
 ---
+- name: enable syncthing
+  command: systemctl --user enable syncthing.service
+  register: enable_syncthing
+  changed_when: enable_syncthing is success
+  tags: syncthing
+
+- name: start syncthing
+  command: systemctl --user start syncthing.service
+  when: enable_syncthing is success
+  tags: syncthing
+
+- name: change synchting conf
+  lineinfile:
+    path: ~/.config/syncthing/config.xml
+    regexp: '^(.*<address)>127\.0\.0\.1(.*)$'
+    line: '\1>0.0.0.0\2'
+    backrefs: yes
+  notify: restart syncthing
+  tags: syncthing
 - name: "checkout dot files"
   git:
     repo: http://github.com/tyjak/archlinux
@@ -15,11 +34,25 @@
   register: vim_config_installed
   tags: dotfiles
 
+- name: "get stat about .config folder"
+  stat:
+    path: ~/.config
+  register: cnfd
+  tags: "dotfiles"
+
+- name: "remove .config if it's a folder"
+  file:
+    path: ~/.config
+    state: absent
+  when: cnfd.stat.isdir is defined and cnfd.stat.isdir
+  tags: "dotfiles"
+
 - name: "link common dot files"
   file:
     state: link
     src: ~/src/{{ item.src }}
     dest: ~/{{ item.dest }}
+    force: true
   with_items: "{{ link_common_items }}"
   tags: "dotfiles"
 
@@ -48,19 +81,26 @@
   tags: dotfiles
 
 #FIXME some config (vimb) depends on share folder, that shouldn't be
-- name: enable syncthing
-  command: systemctl --user enable syncthing.service
-  register: enable_syncthing
-  changed_when: enable_syncthing is success
-  tags: syncthing
 
-- name: start syncthing
-  command: systemctl --user start syncthing.service
-  when: enable_syncthing is success
-  tags: syncthing
+- name: test if share folder exists
+  stat:
+    path: ~/share
+  register: shared
+  tags: dotfiles, config
+
+- name: link config files from share folder
+  file:
+    state: link
+    src: ~/share/{{ item.src }}
+    dest: ~/{{ item.dest }}
+    force: true
+  with_items: "{{ link_share_items }}"
+  when: shared.stat.isdir is defined and shared.stat.isdir
+  tags: dotfiles
 
 - import_tasks: config.yml
   when: config|default(false)
+  tags: config
 
 - import_tasks: i3.yml
   when: i3|default(false)

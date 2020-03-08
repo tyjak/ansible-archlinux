@@ -1,17 +1,17 @@
 ---
-# install no gui yaourt packages
+# install no gui aur packages
 
 - name: get new packages to install
-  command: yaourt -Q {{ item }}
+  command: yay -Q {{ item }}
   register: packages_presence
-  with_items: nogui_yaourt_packages
+  with_items: "{{ nogui_aur_package }}"
   ignore_errors: yes
-  changed_when: packages_presence is is failed
+  changed_when: packages_presence is failed
 
-- name: install yaourt packages
+- name: install aur packages
   become: false
-  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
+  command: /usr/bin/yay --noconfirm -S {{ item.item }}
   when: item is failed
-  with_items: packages_presence.results
+  with_items: "{{ packages_presence.results }}"
   ignore_errors: yes
 

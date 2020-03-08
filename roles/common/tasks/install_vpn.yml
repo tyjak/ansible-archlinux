@@ -1,6 +1,6 @@
 ---
 - name: get new vpn package to install
-  command: yaourt -Q {{ item }}
+  command: yay -Q {{ item }}
   register: vpn_presence
   with_items: vpn_package
   when: vpn|default(false)
@@ -10,7 +10,7 @@
 
 - name: install vpn package
   become: false
-  command: /usr/bin/yaourt --noconfirm -S {{ item.item }}
+  command: /usr/bin/yay --noconfirm -S {{ item.item }}
   with_items: vpn_presence.results
   when: item is failed and gui
   ignore_errors: yes

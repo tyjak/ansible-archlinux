@@ -13,6 +13,6 @@
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: build and deploy
-  shell: cd /tmp/yay && makepkg -si
+  shell: cd /tmp/yay && makepkg -si --noconfirm --needed --noprogressbar --asdeps
   when: not yay_installed.stat.exists
   tags: yay

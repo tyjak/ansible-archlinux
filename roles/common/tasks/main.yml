@@ -3,15 +3,18 @@
 - name: update and upgrade
   become: true
   pacman: update_cache=yes
+  tags: pkg
 
 - name: install base package
   become: true
   pacman: name={{ base_package }}
+  tags: pkg
 
 - name: install common package
   become: true
-  pacman: name={{ base_package }}
+  pacman: name={{ package }}
   when: install is undefined or install!='minimal'
+  tags: pkg
 
 - import_tasks: configure_locale.yml
 
@@ -24,7 +27,7 @@
 
 - import_tasks: nogui.yml
   when: not gui
-  tags: nogui
+  tags: nogui, pkg
 - import_tasks: gui.yml
   when: gui
   tags: gui
@@ -47,7 +50,9 @@
 
 - name: install host pacman misc packages
   become: true
-  pacman: name={{ pacman_misc_package }}
+  pacman:
+    name: "{{ pacman_misc_package }}"
+    state: present
   when: pacman_misc_package is defined
   tags: misc
 
@@ -72,7 +77,7 @@
   become: true
   service: name={{ item }} state=started enabled=yes
   with_items: "{{ additional_service }}"
-  when: misc_presence.changed
+  when: misc_presence.changed or pacman_misc_package is defined
   tags: misc
 
   #- import_tasks: install_vpn.yml

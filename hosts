@@ -9,9 +9,12 @@ archeesw
 
 #servers with gui
 [ground]
+localhost ansible_connection=local
+archy
 archee
 archeebox
 asus
 archmini
 archeepe
+archozma ansible_python_interpreter=/usr/bin/python
 

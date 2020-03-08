@@ -1,5 +1,7 @@
 ---
 base_package:
+  - man-db
+  - man-pages
   - ntp
   - iftop
   - htop
@@ -25,17 +27,21 @@ package:
   - ranger
   - dictd
   - fd
-  - gotop
   - termite
+  - cairo
+  - usbutils
 
-nogui_yaourt_package:
-  - git-crypt
-  - vim
+common_aur_package:
   - yq
+  - gotop
+  - oh-my-zsh-git
+
+nogui_aur_package:
+  - vim
 
 gui_pacman_package:
   - xdotool
-  - rxvt-unicode
+  - termite
   - dunst
   - feh
   - slim
@@ -44,34 +50,31 @@ gui_pacman_package:
   - xorg-xrdb
   - xclip
   - xsel
-  - cairo
   - gtk2
   - gtk3
-  - xorg-xfontsel
   - udiskie
   - gvim
-  - quickswitch-i3
+  - i3-wm
+  - i3lock
 
-gui_yaourt_packages:
+gui_aur_package:
   - python-pywapi
   - python-netifaces
   - python-colour
   - python-psutil
-  - i3-git
-  - i3pystatus-git
-  - i3lock
   - dmenu2
+  - i3pystatus-git
+  - quickswitch-i3
+  - clipmenu
 #  - htop-vim-solarized-git
   - weather
   - vimb
-  - clipmenu
   - quickswitch-i3
-  - basiciw
   - python-basiciw
   - urlview
-  - adwaita-icon-theme
 # WARNING numix install inkscape and doesn't remove it TODO: remove inkscape
   - gtk-theme-numix-solarized-git
+  - adwaita-icon-theme
   - git-crypt
   - libvpx
   - gst-libav
@@ -80,28 +83,24 @@ gui_yaourt_packages:
   - wuzz
   - maim
   - browserpass
-  - passmenud
   - urlscan
+  - quickswitch-i3
+  - lxappearance
 
 fonts_package:
   - freetype2
-  - xorg-xfontsel
   - terminus-font
-  - terminus-font-ttf
   - ttf-dejavu
   - otf-inconsolata-powerline-git
   - otf-powerline-symbols-git
-  - otf-texgyre
-  - ttf-mac-fonts
   - ttf-weather-icons
-  - otf-font-awesome
-  - otf-meslo-powerline-git
   - otf-powerline-symbols-git
-  - ttf-inconsolata
   - ttf-liberation
   - ttf-weather-icons
   - ttf-font-icons
   - vim-devicons
+  - ttf-meslo
+  - ttf-meslo-powerline-git
 #  - ttf-freefont
 #  - fontconfig-infinality
 

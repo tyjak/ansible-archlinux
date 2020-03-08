@@ -4,3 +4,6 @@
   lineinfile: dest=~/.xinitrc insertafter="^# var settings" line="{{ item }}"
   with_items: "{{ config.xinitrc }}"
 
+- name: make zsh default shell
+  become: true
+  command: chsh -s /usr/bin/zsh {{ ansible_user_id }}

@@ -5,3 +5,10 @@
   register: command_result
   failed_when: command_result.stderr
 
+- name: restart syncthing
+  systemd:
+    name: syncthing
+    state: restarted
+    scope: user
+  listen: "restart syncthing"
+

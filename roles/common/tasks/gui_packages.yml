@@ -4,36 +4,46 @@
 - name: install pacman gui package
   become: true
   pacman: name={{ gui_pacman_package }}
+  tags: pkg
 
 - name: get new packages to install
-  command: yaourt -Q {{ item }}
+  command: yay -Q {{ item }}
   register: packages_presence
-  with_items: "{{ gui_yaourt_packages }}"
+  with_items: "{{ common_aur_package + gui_aur_package }}"
   ignore_errors: yes
   changed_when: packages_presence is failed
-  tags: test
+  tags: pkg,test
 
-- name: install yaourt packages
+- name: install aur packages
   become: false
-  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
+  command: /usr/bin/yay --noconfirm -S {{ item.item }}
   when: item is failed
   with_items: "{{ packages_presence.results }}"
   ignore_errors: yes
 
 - name: get host theme packages
-  command: yaourt -Q {{ item }}
+  command: yay -Q {{ item }}
   register: theme_presence
   with_items: "{{ theme_package }}"
   when: theme_package is defined
   changed_when: theme_presence is failed
   ignore_errors: yes
-  tags: theme
+  tags: pkg,theme
 
 - name: install theme package
   become: false
-  command: /usr/bin/yaourt --force --noconfirm -S {{ item.item }}
+  command: /usr/bin/yay --noconfirm -S {{ item.item }}
   with_items: "{{ theme_presence.results }}"
   when: item is failed
   ignore_errors: yes
-  tags: theme
+  tags: pkg,theme
+
+# run ansible-playbook install.yml -i hosts --limit=localhost --tags=testpkg --check to check if pkg available on local system
+- name: test packages installed
+  become: false
+  command: /usr/bin/yay -Qs {{ item }}
+  with_items: "{{ common_aur_package + gui_pacman_package + gui_aur_package + fonts_package + vpn_package }}"
+  when: ansible_check_mode
+  check_mode: no
+  tags: pkg,testpkg
 

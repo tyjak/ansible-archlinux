@@ -17,6 +17,16 @@ link_gui_items:
   - src: archlinux/.fehbg
     dest: .fehbg
 
+link_share_items:
+  - src: .gnupg
+    dest: .gnupg
+  - src: .password-store
+    dest: .password-store
+  - src: .zshrc
+    dest: .zshrc
+  - src: fonts
+    dest: .local/share/fonts
+
 link_macbook_items:
   - src: archlinux/.Xmodmap
     dest: .Xmodmap
