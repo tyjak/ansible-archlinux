@@ -35,6 +35,8 @@ common_aur_package:
   - yq
   - gotop
   - oh-my-zsh-git
+  - direnv
+  - python-virtualenvwrapper
 
 nogui_aur_package:
   - vim
@@ -101,7 +103,6 @@ fonts_package:
   - ttf-font-icons
   - vim-devicons
   - ttf-meslo
-  - ttf-meslo-powerline-git
 #  - ttf-freefont
 #  - fontconfig-infinality
 

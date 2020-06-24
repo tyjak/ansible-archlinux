@@ -14,7 +14,6 @@ misc_package:
   - xf86-video-fbdev
   - xf86-video-intel
   - xf86-video-vesa
-  - pulseaudio-raop2
   - avahi
   - paprefs
   - gnome-packagekit
