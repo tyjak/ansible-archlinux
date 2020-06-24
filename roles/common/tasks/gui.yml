@@ -1,6 +1,6 @@
 ---
 
-# packages 
+# packages
 - import_tasks: gui_packages.yml
   tags: pkg,aur
 

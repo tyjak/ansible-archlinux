@@ -14,7 +14,7 @@ archy
 archee
 archeebox
 asus
-archmini
+archmini ansible_python_interpreter=/usr/bin/python
 archeepe
 archozma ansible_python_interpreter=/usr/bin/python
 

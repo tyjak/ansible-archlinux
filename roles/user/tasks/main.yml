@@ -18,6 +18,7 @@
     backrefs: yes
   notify: restart syncthing
   tags: syncthing
+
 - name: "checkout dot files"
   git:
     repo: http://github.com/tyjak/archlinux

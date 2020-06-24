@@ -3,7 +3,7 @@
 
 - name: install pacman gui package
   become: true
-  pacman: name={{ gui_pacman_package }}
+  pacman: name={{ gui_pacman_package }} extra_args="--noconfirm"
   tags: pkg
 
 - name: get new packages to install
@@ -12,7 +12,7 @@
   with_items: "{{ common_aur_package + gui_aur_package }}"
   ignore_errors: yes
   changed_when: packages_presence is failed
-  tags: pkg,test
+  tags: pkg
 
 - name: install aur packages
   become: false

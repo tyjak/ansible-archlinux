@@ -53,10 +53,10 @@ gui_pacman_package:
   - gtk2
   - gtk3
   - udiskie
-  - gvim
   - i3-wm
   - i3lock
   - unclutter
+  - pavucontrol
 
 gui_aur_package:
   - python-pywapi

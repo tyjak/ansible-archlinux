@@ -3,7 +3,7 @@ archlinux_branch: "macbook"
 keyboard: "mac-azerty"
 vpn:
   ppp: false
-  openvpn: true
+  openvpn: false
 
 misc_package:
   - cups
@@ -11,9 +11,14 @@ misc_package:
   - lxdm
   - firefox
   - xf86-input-synaptics
+  - xf86-video-fbdev
+  - xf86-video-intel
+  - xf86-video-vesa
   - pulseaudio-raop2
   - avahi
   - paprefs
+  - gnome-packagekit
+  - kodi
 
 additional_service:
   - org.cups.cupsd.service
