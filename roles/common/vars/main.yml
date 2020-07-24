@@ -1,5 +1,6 @@
 ---
 base_package:
+  - archlinux-keyring
   - man-db
   - man-pages
   - ntp
@@ -46,7 +47,7 @@ gui_pacman_package:
   - termite
   - dunst
   - feh
-  - slim
+#- slim
   - xorg-server
   - xorg-xinit
   - xorg-xrdb
@@ -87,7 +88,6 @@ gui_aur_package:
   - maim
   - browserpass
   - urlscan
-  - quickswitch-i3
   - lxappearance
 
 fonts_package:
@@ -109,4 +109,4 @@ fonts_package:
 vpn_package:
   - remmina
   - remmina-plugin-rdesktop
-  - pptpclient
+#- pptpclient

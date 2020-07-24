@@ -8,5 +8,6 @@
   become: true
   command: chsh -s /usr/bin/zsh {{ ansible_user_id }}
 
-- name: set local for xdotool
-  command: setxkbmap fr
+# FIXME run only local or setup export DISPLAY
+#- name: set local for xdotool
+#  command: setxkbmap fr

@@ -35,22 +35,22 @@
   when: has_bluetooth is success
   tags: bluetooth
 
-- name: configure slim
-  become: true
-  lineinfile:
-    dest: /etc/slim.conf
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-    backrefs: yes
-  with_items:
-    - { regexp: '^# sessionstart_cmd', line: 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' }
-    - { regexp: '^# sessionstop_cmd', line: 'sessionstop_cmd    /usr/bin/sessreg -d -l $DISPLAY %user' }
-    - { regexp: '^current_theme.*default$', line: 'current_theme  archlinux-solarized' }
-
-- name: install slim theme
-  become: true
-  git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
-  
-- name: enable slim at boot
-  become: true
-  service: name=slim enabled=yes
+#- name: configure slim
+#  become: true
+#  lineinfile:
+#    dest: /etc/slim.conf
+#    regexp: "{{ item.regexp }}"
+#    line: "{{ item.line }}"
+#    backrefs: yes
+#  with_items:
+#    - { regexp: '^# sessionstart_cmd', line: 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' }
+#    - { regexp: '^# sessionstop_cmd', line: 'sessionstop_cmd    /usr/bin/sessreg -d -l $DISPLAY %user' }
+#    - { regexp: '^current_theme.*default$', line: 'current_theme  archlinux-solarized' }
+#
+#- name: install slim theme
+#  become: true
+#  git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
+#  
+#- name: enable slim at boot
+#  become: true
+#  service: name=slim enabled=yes

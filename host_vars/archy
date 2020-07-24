@@ -8,16 +8,12 @@ vpn:
 misc_package:
   - cups
   - brother-hl2030
-  - lxdm
-  - firefox
   - xf86-input-synaptics
   - xf86-video-fbdev
   - xf86-video-intel
   - xf86-video-vesa
   - avahi
   - paprefs
-  - gnome-packagekit
-  - kodi
 
 additional_service:
   - org.cups.cupsd.service

@@ -21,9 +21,9 @@
 - import_tasks: install_yay.yml
   when: install is undefined or install!='minimal'
 
-- name: refresh key
-  become: true
-  command: pacman-key --refresh-keys
+  #- name: refresh key
+  #  become: true
+  #  command: pacman-key --refresh-keys
 
 - import_tasks: nogui.yml
   when: not gui
@@ -44,7 +44,7 @@
 
 - name: install wifi
   become: true
-  pacman: name=wpa_supplicant state=present
+  pacman: name=iwd state=present
   when: has_wifi is success
   tags: wifi
 
