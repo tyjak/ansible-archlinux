@@ -24,6 +24,7 @@
     repo: http://github.com/tyjak/archlinux
     dest: ~/src/archlinux
     remote: archlinux_branch
+    version: "{{ archlinux_branch|default('master') }}"
     update: no
   tags: "dotfiles"
 

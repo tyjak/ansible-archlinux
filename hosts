@@ -1,6 +1,6 @@
 # servers with nogui
 [minimal]
-alarmpi ansible_python_interpreter=/usr/bin/python
+alarmpi
 
 [cloud]
 do2
@@ -9,11 +9,10 @@ archeesw
 
 #servers with gui
 [ground]
-localhost ansible_connection=local
-archy ansible_python_interpreter=/usr/bin/python
+archy ansible_host=localhost ansible_connection=local
 archee
 archeebox
 asus
-archmini ansible_python_interpreter=/usr/bin/python
+archmini
 archeepe
-archozma ansible_python_interpreter=/usr/bin/python
+archozma

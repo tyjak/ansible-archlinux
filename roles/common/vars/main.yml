@@ -31,6 +31,7 @@ package:
   - termite
   - cairo
   - usbutils
+  - tig
 
 common_aur_package:
   - yq
@@ -77,7 +78,7 @@ gui_aur_package:
   - python-basiciw
   - urlview
 # WARNING numix install inkscape and doesn't remove it TODO: remove inkscape
-  - gtk-theme-numix-solarized-git
+  - gtk-theme-numix-solarized
   - adwaita-icon-theme
   - git-crypt
   - libvpx
