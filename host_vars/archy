@@ -25,3 +25,8 @@ config:
     - export PRINTER=Brother_HL_2030_series
   cupsclient:
     - 192.168.0.40
+  X11:
+    files:
+        - 00-keyboard.conf
+        - 10-magicktrackpad.conf
+        - 30-trackpad.conf

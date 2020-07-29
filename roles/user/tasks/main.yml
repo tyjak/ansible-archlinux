@@ -100,6 +100,16 @@
   when: shared.stat.isdir is defined and shared.stat.isdir
   tags: dotfiles
 
+- name: link config files with hardware dependecies
+  file:
+    state: link
+    src: ~/src/{{ item.src }}
+    dest: ~/{{ item.dest }}
+    force: true
+  with_items: "{{ link_macbook_items }}"
+  when: link_macbook_items is defined
+  tags: dotfiles
+
 - import_tasks: config.yml
   when: config|default(false)
   tags: config

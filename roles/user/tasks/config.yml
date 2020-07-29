@@ -8,6 +8,14 @@
   become: true
   command: chsh -s /usr/bin/zsh {{ ansible_user_id }}
 
+- name: configure X11
+  become: true
+  copy: src="X11/{{ item }}" dest="/etc/X11/xorg.conf.d/{{ item }}"
+  with_items: "{{ config.X11.files }}"
+  when: config.X11.files is defined
+  tags: x11
+
+
 # FIXME run only local or setup export DISPLAY
 #- name: set local for xdotool
 #  command: setxkbmap fr

@@ -5,8 +5,12 @@ import os.path
 
 from i3pystatus import Status
 from i3pystatus.weather import weathercom
+from i3pystatus.updates import yay, pacman
 
 status = Status(standalone=True)
+
+#show a dot
+status.register("anybar")
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
@@ -14,22 +18,36 @@ status = Status(standalone=True)
 status.register("clock")
 
 # Show sound
-if os.path.isfile("/etc/pulse/daemon.conf"):
-    status.register("pulseaudio",
-            format="\U0001D160  {volume}",
-            )
+status.register("pulseaudio",
+        format="\U0001D160  {volume}",
+        color_muted="#FF0000",
+        on_leftclick="apptoggle pavucontrol"
+        )
 
 # Show battery
 if os.path.isfile("/sys/class/power_supply/BAT0/uevent"):
     status.register("battery",
-            format="{remaining} {status}",
-            alert=True,
-            alert_percentage= 10,
-            status={"DPL":"\uf212",
-                    "CHR":"\uf211",
-                    "DIS":"\uf215",
-                    "FULL":"\uf213"}
+            format = "[{remaining} ]{status}{glyph}",
+            alert = True,
+            alert_percentage = 8,
+            full_color = "#00FF00",
+            charging_color = "#b58900",
+            critical_color = "#FF0000",
+            glyphs = ["\uf244","\uf243","\uf242","\uf241","\uf240"],
+            status = {"DPL":"\uf12a",
+                    "CHR":"\uf0e7",
+                    "DIS":"",
+                    "FULL":""}
             )
+# Show count updates available
+status.register("updates",
+        backends = [yay.Yay(), pacman.Pacman()],
+        format = "\uf187 {count}",
+        format_working = "\uf94f",
+        on_rightclick = 'popup -d -s medium -f -e "yay -Syu && echo \"Done.\""',
+        color = "#FF0000",
+        color_working = "#FF8800"
+        )
 
 # Show network
 status.register("network",
@@ -38,6 +56,8 @@ status.register("network",
     dynamic_color={{ i3.status.network.dynamic_color|default('True') }},
     graph_style="{{ i3.status.network.graph_style|default('Fill') }}",
     graph_width={{ i3.status.network.graph_width|default(5) }}
+    on_rightclick = 'popup -e "iwctl station {{ i3.status.network.interface|default(\'eth0\') }}"',
+    on_leftclick = 'popup -e "watch -n 0.2 iwconfig"',
 	)
 
 {% if i3.status.vpn is defined %}
