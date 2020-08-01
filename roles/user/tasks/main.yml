@@ -117,10 +117,6 @@
 - import_tasks: i3.yml
   when: i3|default(false)
 
-- import_tasks: vpn_ppp_adsnovo.yml
-  when: vpn is defined and vpn.ppp|default(false)
-  tags: vpn
-
-- import_tasks: vpn_opvn_adsnovo.yml
-  when: vpn is defined and vpn.openvpn|default(false)
+- import_tasks: vpn_opvn.yml
+  when: openvpn is defined
   tags: vpn

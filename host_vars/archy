@@ -1,9 +1,7 @@
 ---
-archlinux_branch: "macbook"
-keyboard: "mac-azerty"
-vpn:
-  ppp: false
-  openvpn: false
+archlinux_branch: macbook
+keyboard: mac-azerty
+openvpn: creamy
 
 misc_package:
   - cups
@@ -14,6 +12,7 @@ misc_package:
   - xf86-video-vesa
   - avahi
   - paprefs
+  - libmobiledevice
 
 additional_service:
   - org.cups.cupsd.service
@@ -27,6 +26,5 @@ config:
     - 192.168.0.40
   X11:
     files:
-        - 00-keyboard.conf
         - 10-magicktrackpad.conf
         - 30-trackpad.conf

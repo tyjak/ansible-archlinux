@@ -15,7 +15,32 @@
   when: config.X11.files is defined
   tags: x11
 
+- name: set local for xdotool
+  command: localectl set-x11-keymap fr macintosh
 
-# FIXME run only local or setup export DISPLAY
-#- name: set local for xdotool
-#  command: setxkbmap fr
+- name: test if wyebadblock is installed
+  become: true
+  stat: path=/usr/lib/wyebrowser/adblock.so
+  register: wyebadblock
+  tags: adblock
+
+- name: install last adblock css file
+  get_url: 
+    url: https://easylist.to/easylist/easylist.txt
+    dest: ~/.config/wyebadblock/easylist.txt
+    force: true
+  when: wyebadblock.stat.exists
+  tags: adblock
+
+# NOTE: not needed since wyebadblock install normaly the plugin itself
+#- name: test if vimb plugin dir exists
+#  become: true
+#  stat: path=/usr/lib/vimb
+#  register: vimbplugins
+#  tags: adblock
+#
+#- name: configure adblock module for vimb
+#  become: true
+#  file: state=link src=/usr/lib/wyebrowser/adblock.so dest=/usr/lib/vimb/adblock.so
+#  when: wyebadblock.stat.exists and vimbplugins.stat.exists
+#  tags: adblock

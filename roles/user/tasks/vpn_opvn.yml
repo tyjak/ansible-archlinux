@@ -1,0 +1,42 @@
+---
+
+- name: install openvpn
+  become: true
+  pacman: name=openvpn
+  tags: vpn
+
+- name: test if openvpn-update-systemd-resolved is installed
+  become: true
+  stat: path=/etc/openvpn/update-resolv-conf
+  register: openvpnupdatesystemdresolved
+  tags: vpn
+
+- name: install openvpn-update-systemd-resolved
+  become: false
+  command: /usr/bin/yay --noconfirm -S openvpn-update-systemd-resolved
+  when: openvpnupdatesystemdresolved.stat.exists == False
+  tags: vpn
+
+- name: test if config is present
+  become: true
+  stat: path=/etc/openvpn/client/"{{ openvpn }}".conf
+  register: openvpn_conf
+  tags: vpn
+
+- name: copy openvpn config
+  become: true
+  copy: src="vpn/{{ openvpn }}_openvpn.vault" dest="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz"
+  when: openvpn_conf.stat.exists == False
+  tags: vpn
+
+- name: copy and install openvpn config
+  become: true
+  unarchive: src="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz" dest=/etc/openvpn/client/ remote_src=yes
+  when: openvpn_conf.stat.exists == False
+  tags: vpn
+
+- name: enable openvpn vpn service
+  become: true
+  service: name="openvpn-client@{{ openvpn }}" enabled=yes
+  tags: vpn
+

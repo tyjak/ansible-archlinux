@@ -10,6 +10,20 @@
   when: keyboard|default(False) == 'mac-azerty'
   tags: keyboard
 
+- name: enable and start nework services
+  become: true
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - systemd-networkd
+    - systemd-resolved
+  tags: network
+
+- name: enable and start wifi
+  become: true
+  service: name=iwd state=started enabled=yes
+  when: has_wifi is success
+  tags: network
+
 - name: has bluetooth ?
   shell: "lsusb | grep -i bluetooth"
   register: has_bluetooth

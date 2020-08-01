@@ -25,6 +25,23 @@
   #  become: true
   #  command: pacman-key --refresh-keys
 
+- name: has wifi ?
+  shell: dmesg | grep -i "wlan"
+  register: has_wifi
+  changed_when: has_wifi is success
+  ignore_errors: true
+  tags:
+    - wifi
+    - network
+
+- name: install wifi
+  become: true
+  pacman: name=iwd state=present
+  when: has_wifi is success
+  tags:
+    - wifi
+    - network
+
 - import_tasks: nogui.yml
   when: not gui
   tags: nogui, pkg
@@ -34,19 +51,6 @@
 - import_tasks: fonts.yml
   when: gui
   tags: fonts
-
-- name: has wifi ?
-  shell: dmesg | grep -i "wlan"
-  register: has_wifi
-  changed_when: has_wifi is success
-  ignore_errors: true
-  tags: wifi
-
-- name: install wifi
-  become: true
-  pacman: name=iwd state=present
-  when: has_wifi is success
-  tags: wifi
 
 - name: install host pacman misc packages
   become: true
