@@ -4,11 +4,25 @@
 - import_tasks: gui_packages.yml
   tags: pkg,aur
 
-- name: configure keyboard
+- name: configure X11 keyboard
   become: true
-  copy: src=00-keyboard-mac-azerty.conf dest=/etc/X11/xorg.conf.d/00-keyboard.conf
+  command: localectl set-x11-keymap fr macintosh
   when: keyboard|default(False) == 'mac-azerty'
   tags: keyboard
+
+- name: configure X11
+  become: true
+  copy: src="X11/{{ item }}" dest="/etc/X11/xorg.conf.d/{{ item }}"
+  with_items: "{{ config.X11.files }}"
+  when: config.X11.files is defined
+  tags: x11
+
+- name: configure kernel module
+  become: true
+  copy: src="modprobe.d/{{ item }}" dest="/etc/modprobe.d/{{ item }}"
+  with_items: "{{ config.modprobe.files }}"
+  when: config.modprobe.files is defined
+  tags: modprobe
 
 - name: enable and start nework services
   become: true
@@ -39,7 +53,8 @@
 
 - name: up bluetooth device on start
   become: true
-  copy: src=10-local.rules dest=/etc/udev/rules.d/10-local.rules
+  copy: src="udev/rules.d/{{ item }}" dest="/etc/udev/rules.d/{{ item }}"
+  with_items: "{{ etc.udev.rules }}"
   when: has_bluetooth is success
   tags: bluetooth
 

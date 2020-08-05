@@ -8,16 +8,6 @@
   become: true
   command: chsh -s /usr/bin/zsh {{ ansible_user_id }}
 
-- name: configure X11
-  become: true
-  copy: src="X11/{{ item }}" dest="/etc/X11/xorg.conf.d/{{ item }}"
-  with_items: "{{ config.X11.files }}"
-  when: config.X11.files is defined
-  tags: x11
-
-- name: set local for xdotool
-  command: localectl set-x11-keymap fr macintosh
-
 - name: test if wyebadblock is installed
   become: true
   stat: path=/usr/lib/wyebrowser/adblock.so
@@ -25,7 +15,7 @@
   tags: adblock
 
 - name: install last adblock css file
-  get_url: 
+  get_url:
     url: https://easylist.to/easylist/easylist.txt
     dest: ~/.config/wyebadblock/easylist.txt
     force: true

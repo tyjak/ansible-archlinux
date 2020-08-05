@@ -45,9 +45,11 @@
 - import_tasks: nogui.yml
   when: not gui
   tags: nogui, pkg
+
 - import_tasks: gui.yml
   when: gui
   tags: gui
+
 - import_tasks: fonts.yml
   when: gui
   tags: fonts
@@ -84,5 +86,5 @@
   when: misc_presence.changed or pacman_misc_package is defined
   tags: misc
 
-  #- import_tasks: install_vpn.yml
-  #  tags: vpn
+#- import_tasks: install_vpn.yml
+#  tags: vpn

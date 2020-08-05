@@ -42,4 +42,3 @@
   become: true
   command: "localectl set-keymap --no-convert fr"
   when: has_configured is failed
-

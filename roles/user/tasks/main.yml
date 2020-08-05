@@ -110,6 +110,15 @@
   when: link_macbook_items is defined
   tags: dotfiles
 
+- name: add some git host repo
+  git:
+    repo: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ repo }}"
+  when: repo is defined
+  tags: git
+
+
 - import_tasks: config.yml
   when: config|default(false)
   tags: config

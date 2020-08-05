@@ -1,4 +1,9 @@
 ---
+etc:
+  udev:
+    rules:
+      - 10-local.rules
+
 base_package:
   - archlinux-keyring
   - man-db
@@ -61,6 +66,8 @@ gui_pacman_package:
   - i3lock
   - unclutter
   - pavucontrol
+  - avahi
+  - paprefs
   - wyebadblock-git
 
 gui_aur_package:
@@ -91,6 +98,8 @@ gui_aur_package:
   - browserpass
   - urlscan
   - lxappearance
+  - menu-calc
+  - redshift
 
 fonts_package:
   - freetype2

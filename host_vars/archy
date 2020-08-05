@@ -10,13 +10,15 @@ misc_package:
   - xf86-video-fbdev
   - xf86-video-intel
   - xf86-video-vesa
-  - avahi
-  - paprefs
   - libmobiledevice
 
 additional_service:
   - org.cups.cupsd.service
   - avahi-daemon.service
+
+repo:
+  - src: git@github.com:tyjak/vimwiki.git
+    dest: ~/vimwiki
 
 config:
   xinitrc:
@@ -28,3 +30,7 @@ config:
     files:
         - 10-magicktrackpad.conf
         - 30-trackpad.conf
+  modprobe:
+    files:
+        # macbooka air modem
+        - local-b43.conf
