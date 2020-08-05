@@ -80,6 +80,6 @@
 #  become: true
 #  git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
 #  
-#- name: enable slim at boot
-#  become: true
-#  service: name=slim enabled=yes
+- name: enable lightdm at boot
+  become: true
+  service: name=lightdm enabled=yes

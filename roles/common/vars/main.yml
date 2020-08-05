@@ -53,7 +53,7 @@ gui_pacman_package:
   - termite
   - dunst
   - feh
-#- slim
+  - lightdm
   - xorg-server
   - xorg-xinit
   - xorg-xrdb

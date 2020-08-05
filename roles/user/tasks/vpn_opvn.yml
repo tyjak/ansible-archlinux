@@ -7,7 +7,7 @@
 
 - name: test if openvpn-update-systemd-resolved is installed
   become: true
-  stat: path=/etc/openvpn/update-resolv-conf
+  stat: path=/etc/openvpn/scripts/update-systemd-resolved
   register: openvpnupdatesystemdresolved
   tags: vpn
 
@@ -33,6 +33,11 @@
   become: true
   unarchive: src="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz" dest=/etc/openvpn/client/ remote_src=yes
   when: openvpn_conf.stat.exists == False
+  tags: vpn
+
+- name: delete the archive
+  become: true
+  file: path="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz" state=absent
   tags: vpn
 
 - name: enable openvpn vpn service

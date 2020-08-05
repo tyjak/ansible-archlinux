@@ -4,9 +4,10 @@
     - [ ] updates yay
     - [ ] hd space left -> just one not two
     - [ ] sound keyboard level up / down  + mute
-- [ ] Theme color
+- [ ] Theme color -> gtk3.0 with theme settings in ~/.config/gtk-3.0/settings.ini or with commadn line : gsettings set org.gnome.desktop.interface gtk-theme NumixSolarizedDarkRed DOES NOT WORK...
+- [ ] ansible gui mode -> replace vim by gvim
 - [ ] Background on new window
-- [ ] Button shutdown to show menu instead of shutting down
+- [ ] Button shutdown to show menu instead of shutting down (maybe related with .Xmodmap not applied or badly configured)
 - [ ] Mpd popup window
 - [ ] clipboard dmenu
 - [ ] pommed refuse to compile
