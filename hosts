@@ -9,7 +9,8 @@ archeesw
 
 #servers with gui
 [ground]
-archy ansible_host=localhost ansible_connection=local
+localhost
+archy
 archee
 archeebox
 asus

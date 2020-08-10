@@ -4,6 +4,7 @@ keyboard: mac-azerty
 openvpn: creamy
 
 misc_package:
+  - pommed-light
   - cups
   - brother-hl2030
   - xf86-input-synaptics
@@ -15,6 +16,7 @@ misc_package:
 additional_service:
   - org.cups.cupsd.service
   - avahi-daemon.service
+  - pommed.service
 
 repo:
   - src: git@github.com:tyjak/vimwiki.git

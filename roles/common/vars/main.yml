@@ -8,6 +8,7 @@ base_package:
   - archlinux-keyring
   - man-db
   - man-pages
+  - ansible
   - ntp
   - iftop
   - htop

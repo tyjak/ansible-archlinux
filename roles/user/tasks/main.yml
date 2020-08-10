@@ -1,13 +1,8 @@
 ---
 - name: enable syncthing
-  command: systemctl --user enable syncthing.service
+  command: systemctl --user enable --now syncthing.service
   register: enable_syncthing
   changed_when: enable_syncthing is success
-  tags: syncthing
-
-- name: start syncthing
-  command: systemctl --user start syncthing.service
-  when: enable_syncthing is success
   tags: syncthing
 
 - name: change synchting conf
