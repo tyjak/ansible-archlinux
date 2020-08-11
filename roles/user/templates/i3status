@@ -52,7 +52,7 @@ status.register("updates",
 # Show network
 status.register("network",
 	interface="{{ i3.status.network.interface|default('eth0') }}",
-    format_up="{{ i3.status.network.format_up|default('{network_graph}{kbs}KB/s') }}",
+    format_up="{{ i3.status.network.format_up|default('{network_graph}{kbs}KB/s') }}",
     dynamic_color={{ i3.status.network.dynamic_color|default('True') }},
     graph_style="{{ i3.status.network.graph_style|default('Fill') }}",
     graph_width={{ i3.status.network.graph_width|default(5) }}
