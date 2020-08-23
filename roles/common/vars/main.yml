@@ -38,6 +38,8 @@ package:
   - cairo
   - usbutils
   - tig
+  - nfs-utils
+  - picom
 
 common_aur_package:
   - yq
@@ -55,6 +57,7 @@ gui_pacman_package:
   - dunst
   - feh
   - lightdm
+  - lightdm-gtk-greeter
   - xorg-server
   - xorg-xinit
   - xorg-xrdb
@@ -70,6 +73,8 @@ gui_pacman_package:
   - avahi
   - paprefs
   - wyebadblock-git
+  - zathura
+  - zathura-pdf-mupdf
 
 gui_aur_package:
   - python-pywapi

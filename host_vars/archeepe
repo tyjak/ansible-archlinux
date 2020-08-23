@@ -8,6 +8,9 @@ misc_package:
   - cups
   - firefox
 
-additional_service:
-  - org.cups.cupsd.service
+host_service:
+  start:
+    - org.cups.cupsd.service
 
+
+# vim: filetype=yaml

@@ -22,9 +22,10 @@ theme_package:
   - gtk-engine-equinox
   - ambiance-radiance-flat-colors-suite
 
-additional_service:
-  - org.cups.cupsd.service
-  - avahi-daemon.service
+host_service:
+  start:
+    - org.cups.cupsd.service
+    - avahi-daemon.service
 
 i3:
   status:
@@ -43,3 +44,5 @@ config:
     - export PRINTER=Brother_HL_2030_series
   cupsclient:
     - 192.168.0.40
+
+# vim: filetype=yaml

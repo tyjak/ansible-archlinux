@@ -11,6 +11,14 @@ How to use
 3. initialize the host with init.yml playbook (must be adpated if there no sudo or just root user)
 4. install archlinux `ansible-playbook -i hosts --limit={my machine name} install.yml
 
+Add deploy VPN Configuration
+----------------------------
+Execute `./utils/generate_ansible_openvpn_vault_file.sh {NAME OF YOU VPN LINK}` in root.
 
+
+It will :
+- make an archive of your /etc/openvpn/client/{NAME OF YOUR VPN LINK}_openvpn.* files
+- put in ./roles/user/file/vpn/{NAME OF YOUR VPN LINK}_openvpn.vault
+- encrypted it
 
 [1]: https://github.com/tyjak/ansible-archlinux-old

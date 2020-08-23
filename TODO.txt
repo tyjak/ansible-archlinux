@@ -1,22 +1,26 @@
-= TO fix =
+= TO fix / TODO =
 
 - [ ] Status bar
     - [ ] updates yay
     - [ ] hd space left -> just one not two
     - [ ] sound keyboard level up / down  + mute
+    - [ ] found a way to maintain configuration across devices and with an intialisation with ansible
+    - [ ] change wifi mouse reght mouse click to choose wifi network (find a solution to choose and connect wifi networks with iwctl, maybe with dmenu)
 - [ ] Theme color -> gtk3.0 with theme settings in ~/.config/gtk-3.0/settings.ini or with commadn line : gsettings set org.gnome.desktop.interface gtk-theme NumixSolarizedDarkRed DOES NOT WORK...
 - [ ] ansible gui mode -> replace vim by gvim
-- [ ] Background on new window
+- [o] Background on new window
+    - [X] Image
+    - [ ] Color -> still have some black background on i3 when launch terminal
 - [ ] Button shutdown to show menu instead of shutting down (maybe related with .Xmodmap not applied or badly configured)
-- [ ] Mpd popup window
-- [ ] clipboard dmenu
+- [X] Mpd popup window
+- [X] clipboard dmenu
 - [ ] pommed refuse to compile
 - [ ] screensaver / lock
 - [X] vimb setting for nopub
 - [ ] github host (no settings for git)
-- [ ] ssh
+- [o] ssh
     - [ ] config file
-    - [ ] public key (for functional gpg-agent)
+    - [X] public key (for functional gpg-agent) see perso wiki
 - [ ] fix wifi when /etc/modprobe.d/local-b43 is uncommented: b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
         [   11.512822] b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
         [   11.512856] b43 bcma0:1: Direct firmware load for b43-open/ucode16_mimo.fw failed with error -2
@@ -24,6 +28,13 @@
         [   11.512894] b43-phy0 ERROR: Firmware file "b43/ucode16_mimo.fw" not found
         [   11.512903] b43-phy0 ERROR: Firmware file "b43-open/ucode16_mimo.fw" not found
         [   11.512909] b43-phy0 ERROR: You must go to http://wireless.kernel.org/en/users/Drivers/b43#devicefirmware and download the correct firmware for this driver version. Please carefully read all instructions on this website.
+- [ ] zathura put settings in share/.config folder
+- [X] backlight restore not working see note: https://wiki.archlinux.org/index.php/backlight#Save_and_restore_functionality
+- [ ] add backup process
+- [ ] ernergy setup (switch off scree, halt whant battery empty , test seep mode)
+- [ ] No ssh access to creamy (missing key ?)
+- [ ] emergency quit on heavy load
+- [ ] Test suspend : seems wakeup put disk in read only mode
 
 
 

@@ -14,6 +14,12 @@
   register: wyebadblock
   tags: adblock
 
+# FIXME: Not permanent...
+#- name: install custom DNS
+#  become: true
+#  command: systemd-resolve --interface {{ ansible_default_ipv4.interface }} --set-dns {{ config.dns.ip }} --set-domain {{ config.dns.domain }}
+#  tags: dns
+
 - name: install last adblock css file
   get_url:
     url: https://easylist.to/easylist/easylist.txt

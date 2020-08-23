@@ -31,10 +31,11 @@ theme_package:
   - faenza-icon-theme
   - faenza-cupertino-icon-theme
 
-additional_service:
-  - org.cups.cupsd.service
-  - gvfs
-  - avahi-daemon.service
+host_service:
+  start:
+    - org.cups.cupsd.service
+    - gvfs
+    - avahi-daemon.service
 
 i3:
   status:
@@ -53,3 +54,5 @@ config:
     - export PRINTER=Brother_HL_2030_series
   cupsclient:
     - 192.168.0.40
+
+# vim: filetype=yaml

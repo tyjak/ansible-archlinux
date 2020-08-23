@@ -79,7 +79,16 @@
 #- name: install slim theme
 #  become: true
 #  git: repo=https://github.com/tyjak/slim-theme-archlinux-solarized.git dest=/usr/share/slim/themes/archlinux-solarized
-#  
+#
 - name: enable lightdm at boot
   become: true
   service: name=lightdm enabled=yes
+
+# TOFIX: this setting seems not to be permanent...
+- name: configure theme
+  command: gsettings set org.gnome.desktop.interface gtk-theme NumixSolarizedDarkGreen
+  tags: theme
+
+- name: enable redshift
+  service: name=redshift enabled=yes
+  tags: redshift

@@ -63,6 +63,15 @@
   when: gui
   tags: "dotfiles"
 
+- name: link host files
+  file:
+    state: link
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: yes
+  with_items: "{{ host_links }}"
+  tags: "links"
+
 #FIXME: pb with initialisation without terminal
 #- name: "init vim configuration"
 #command: vim +PlugInstall +qall

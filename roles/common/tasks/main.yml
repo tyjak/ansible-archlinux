@@ -79,12 +79,26 @@
   ignore_errors: yes
   tags: misc
 
-- name: enable host additional service
+- name: enable host service
   become: true
   service: name={{ item }} state=started enabled=yes
-  with_items: "{{ additional_service }}"
+  with_items: "{{ host_service.start }}"
   when: misc_presence.changed or pacman_misc_package is defined
   tags: misc
+
+- name: mask some host service
+  become: true
+  service: name={{ item }} masked=yes
+  with_items: "{{ host_service.mask|default('') }}"
+  when: host_service and host_service.mask is defined
+  tags: mask
+
+- name: enable user host service
+  service: name={{ item }} scope=user state=started enabled=yes
+  with_items: "{{ host_user_service.start }}"
+  when: misc_presence.changed or pacman_misc_package is defined
+  tags: misc
+
 
 #- import_tasks: install_vpn.yml
 #  tags: vpn

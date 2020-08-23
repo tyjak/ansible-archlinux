@@ -14,5 +14,8 @@ pacman_misc_package:
   - bluez
   - bluez-utils
 
-additional_service:
+host_service:
+  start:
   - bluetooth
+
+# vim: filetype=yaml

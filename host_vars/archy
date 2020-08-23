@@ -4,19 +4,37 @@ keyboard: mac-azerty
 openvpn: creamy
 
 misc_package:
-  - pommed-light
   - cups
   - brother-hl2030
   - xf86-input-synaptics
   - xf86-video-fbdev
-  - xf86-video-intel
   - xf86-video-vesa
-  - libmobiledevice
+  - libimobiledevice
+  - mpd
+  - mpc
+  - ncmpcpp
+  - beets
+  - unzip
+  - vlc
+  - mpv
+  - stig
+  - hfsprogs
 
-additional_service:
-  - org.cups.cupsd.service
-  - avahi-daemon.service
-  - pommed.service
+host_service:
+  start:
+    - org.cups.cupsd.service
+    - avahi-daemon.service
+  mask:
+    - systemd-backlight@backlight:acpi_video0
+
+host_user_service:
+  start:
+    - clipmenud.service
+    - mpd.service
+
+host_links:
+  - src: /run/media/david
+    dest: /home/david/media
 
 repo:
   - src: git@github.com:tyjak/vimwiki.git
@@ -28,6 +46,9 @@ config:
     - export PRINTER=Brother_HL_2030_series
   cupsclient:
     - 192.168.0.40
+  dns:
+    ip: 192.168.0.20
+    domain: creamy.local
   X11:
     files:
         - 10-magicktrackpad.conf
@@ -36,3 +57,5 @@ config:
     files:
         # macbooka air modem
         - local-b43.conf
+
+# vim: filetype=yaml

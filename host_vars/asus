@@ -14,9 +14,10 @@ misc_package:
   - avahi
   - paprefs
 
-additional_service:
-  - org.cups.cupsd.service
-  - avahi-daemon.service
+host_service:
+  start:
+    - org.cups.cupsd.service
+    - avahi-daemon.service
 
 config:
   xinitrc:
@@ -24,3 +25,5 @@ config:
     - export PRINTER=Brother_HL_2030_series
   cupsclient:
     - 192.168.0.40
+
+# vim: filetype=yaml

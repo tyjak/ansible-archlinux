@@ -6,4 +6,5 @@ keyboard: "pc-fr"
 #  - rtorrent
 #additional_service:
 #  - rtorrent.service
-#
+
+# vim: filetype=yaml
