@@ -42,6 +42,6 @@
 
 - name: enable openvpn vpn service
   become: true
-  service: name="openvpn-client@{{ openvpn }}" enabled=yes
+  systemd: name="openvpn-client@{{ openvpn }}" enabled=yes
   tags: vpn
 

@@ -19,6 +19,9 @@ misc_package:
   - mpv
   - stig
   - hfsprogs
+  - pulseaudio
+  - pulseaudio-alsa
+  - pulseaudio-zeroconf
 
 host_service:
   start:
@@ -29,6 +32,7 @@ host_service:
 
 host_user_service:
   start:
+    - pulseaudio.socket
     - clipmenud.service
     - mpd.service
 

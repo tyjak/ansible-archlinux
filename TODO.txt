@@ -1,9 +1,10 @@
 = TO fix / TODO =
 
-- [ ] Status bar
-    - [ ] updates yay
-    - [ ] hd space left -> just one not two
-    - [ ] sound keyboard level up / down  + mute
+- [ ] Splash screen : try plymouth and try to have only onr time password entry
+- [o] Status bar
+    - [X] updates yay
+    - [X] hd space left -> just one not two
+    - [X] sound keyboard level up / down  + mute
     - [ ] found a way to maintain configuration across devices and with an intialisation with ansible
     - [ ] change wifi mouse reght mouse click to choose wifi network (find a solution to choose and connect wifi networks with iwctl, maybe with dmenu)
 - [ ] Theme color -> gtk3.0 with theme settings in ~/.config/gtk-3.0/settings.ini or with commadn line : gsettings set org.gnome.desktop.interface gtk-theme NumixSolarizedDarkRed DOES NOT WORK...
@@ -35,7 +36,9 @@
 - [ ] No ssh access to creamy (missing key ?)
 - [ ] emergency quit on heavy load
 - [ ] Test suspend : seems wakeup put disk in read only mode
-
+- [ ] DNS resolution add in ansible template for /etc/systemd/resolved.conf (add DNS conf) and /etc/systemd/network/20-wireless.network (force DNS conf for wireless ineterface)
+- [ ] Check that systemd-networked and systemd-resolved are enabled and started in ansible
+- [ ] Enable emergency kill on memory overused
 
 
  vim: ft=vimwiki

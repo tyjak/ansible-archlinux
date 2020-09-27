@@ -81,20 +81,20 @@
 
 - name: enable host service
   become: true
-  service: name={{ item }} state=started enabled=yes
+  systemd: name={{ item }} state=started enabled=yes
   with_items: "{{ host_service.start }}"
   when: misc_presence.changed or pacman_misc_package is defined
   tags: misc
 
 - name: mask some host service
   become: true
-  service: name={{ item }} masked=yes
+  systemd: name={{ item }} masked=yes
   with_items: "{{ host_service.mask|default('') }}"
   when: host_service and host_service.mask is defined
   tags: mask
 
 - name: enable user host service
-  service: name={{ item }} scope=user state=started enabled=yes
+  systemd: name={{ item }} user=yes state=started enabled=yes
   with_items: "{{ host_user_service.start }}"
   when: misc_presence.changed or pacman_misc_package is defined
   tags: misc

@@ -24,9 +24,9 @@
   when: config.modprobe.files is defined
   tags: modprobe
 
-- name: enable and start nework services
+- name: enable and start nework systemds
   become: true
-  service: name={{ item }} state=started enabled=yes
+  systemd: name={{ item }} state=started enabled=yes
   with_items:
     - systemd-networkd
     - systemd-resolved
@@ -34,7 +34,7 @@
 
 - name: enable and start wifi
   become: true
-  service: name=iwd state=started enabled=yes
+  systemd: name=iwd state=started enabled=yes
   when: has_wifi is success
   tags: network
 
@@ -60,7 +60,7 @@
 
 - name: enable bluetooth on start
   become: true
-  service: name=bluetooth state=started enabled=yes
+  systemd: name=bluetooth state=started enabled=yes
   when: has_bluetooth is success
   tags: bluetooth
 
@@ -82,7 +82,7 @@
 #
 - name: enable lightdm at boot
   become: true
-  service: name=lightdm enabled=yes
+  systemd: name=lightdm enabled=yes
 
 # TOFIX: this setting seems not to be permanent...
 - name: configure theme
@@ -90,5 +90,5 @@
   tags: theme
 
 - name: enable redshift
-  service: name=redshift enabled=yes
+  systemd: name=redshift enabled=yes user=yes
   tags: redshift

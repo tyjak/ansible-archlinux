@@ -1,5 +1,5 @@
 ---
-# install no gui aur packages
+# install no gui aur packages and enable/start nogui env services
 
 - name: get new packages to install
   command: yay -Q {{ item }}
@@ -15,3 +15,6 @@
   with_items: "{{ packages_presence.results }}"
   ignore_errors: yes
 
+- name: start ntp for timre sync
+  become: true
+  systemd: name=ntpd state=started enabled=yes
