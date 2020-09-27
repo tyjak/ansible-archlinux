@@ -40,5 +40,13 @@
 - [ ] Check that systemd-networked and systemd-resolved are enabled and started in ansible
 - [ ] Enable emergency kill on memory overused
 
+= TO FIX =
+
+- [X] Crash with ntfs4 autmount volume on startup when mpd is starting seems to be before vpn start, seems to crash when automount unmount the volume
+    Testing : 
+    - [X] disable totaly kernel module for wifi in /etc/modprobe.d/blacklist.conf
+    - [X] disable mpd
+    - [X] disable vpn
+
 
  vim: ft=vimwiki

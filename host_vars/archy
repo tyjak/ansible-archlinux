@@ -14,6 +14,8 @@ misc_package:
   - mpc
   - ncmpcpp
   - beets
+  - acoustid-fingerprint
+  - python-pyacoustid
   - unzip
   - vlc
   - mpv
