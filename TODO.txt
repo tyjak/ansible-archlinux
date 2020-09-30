@@ -39,6 +39,8 @@
 - [ ] DNS resolution add in ansible template for /etc/systemd/resolved.conf (add DNS conf) and /etc/systemd/network/20-wireless.network (force DNS conf for wireless ineterface)
 - [ ] Check that systemd-networked and systemd-resolved are enabled and started in ansible
 - [ ] Enable emergency kill on memory overused
+- [ ] fix Weather in i3pystatus
+- [ ] use keys F3 F4 symbol to display last notification and/or cycle within notificaitons history see shortcuts in confi of dunst
 
 = TO FIX =
 

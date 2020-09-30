@@ -67,7 +67,7 @@ gui_pacman_package:
   - gtk3
   - udiskie
   - i3-wm
-  - i3lock
+  - i3lock-fancy-git
   - unclutter
   - pavucontrol
   - avahi
