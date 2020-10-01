@@ -69,6 +69,7 @@
     dest: "{{ item.dest }}"
     force: yes
   with_items: "{{ host_links }}"
+  when: host_links is defined
   tags: "links"
 
 #FIXME: pb with initialisation without terminal

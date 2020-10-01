@@ -90,7 +90,7 @@
   become: true
   systemd: name={{ item }} masked=yes
   with_items: "{{ host_service.mask|default('') }}"
-  when: host_service and host_service.mask is defined
+  when: host_service is defined and host_service.mask is defined
   tags: mask
 
 - name: enable user host service

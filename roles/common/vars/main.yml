@@ -5,6 +5,7 @@ etc:
       - 10-local.rules
 
 base_package:
+  - base-devel
   - archlinux-keyring
   - man-db
   - man-pages
@@ -67,6 +68,7 @@ gui_pacman_package:
   - gtk3
   - udiskie
   - i3-wm
+  - i3lock-color-git
   - i3lock-fancy-git
   - unclutter
   - pavucontrol
