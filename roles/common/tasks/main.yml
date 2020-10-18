@@ -42,6 +42,14 @@
     - wifi
     - network
 
+- name: enable and start nework systemds
+  become: true
+  systemd: name={{ item }} state=started enabled=yes
+  with_items:
+    - systemd-networkd
+    - systemd-resolved
+  tags: network
+
 - import_tasks: nogui.yml
   when: not gui
   tags: nogui, pkg
@@ -83,7 +91,7 @@
   become: true
   systemd: name={{ item }} state=started enabled=yes
   with_items: "{{ host_service.start }}"
-  when: misc_presence.changed or pacman_misc_package is defined
+  when: host_service is defined
   tags: misc
 
 - name: mask some host service
@@ -96,7 +104,7 @@
 - name: enable user host service
   systemd: name={{ item }} user=yes state=started enabled=yes
   with_items: "{{ host_user_service.start }}"
-  when: misc_presence.changed or pacman_misc_package is defined
+  when: host_user_service is defined
   tags: misc
 
 

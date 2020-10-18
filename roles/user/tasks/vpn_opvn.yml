@@ -40,6 +40,11 @@
   file: path="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz" state=absent
   tags: vpn
 
+- name: assume systemd-resolved is started
+  become: true
+  systemd: name="systemd-resolved" enabled=yes
+  tags: vpn
+
 - name: enable openvpn vpn service
   become: true
   systemd: name="openvpn-client@{{ openvpn }}" enabled=yes

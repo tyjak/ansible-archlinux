@@ -24,14 +24,6 @@
   when: config.modprobe.files is defined
   tags: modprobe
 
-- name: enable and start nework systemds
-  become: true
-  systemd: name={{ item }} state=started enabled=yes
-  with_items:
-    - systemd-networkd
-    - systemd-resolved
-  tags: network
-
 - name: enable and start wifi
   become: true
   systemd: name=iwd state=started enabled=yes
@@ -53,8 +45,7 @@
 
 - name: up bluetooth device on start
   become: true
-  copy: src="udev/rules.d/{{ item }}" dest="/etc/udev/rules.d/{{ item }}"
-  with_items: "{{ etc.udev.rules }}"
+  copy: src="udev/rules.d/10-bluetooth.rules" dest="/etc/udev/rules.d/10-bluetooth.rules"
   when: has_bluetooth is success
   tags: bluetooth
 

@@ -1,4 +1,15 @@
 ---
+- name: change shell to zsh
+  become: yes
+  user:
+    name: "{{ lookup('env','USER') }}"
+    shell: /bin/zsh
+
+- name: test if oh-my-zsh installed
+  command: yay -Qs oh-my-zsh-git
+  register: ohmyzsh
+  tags: oh
+
 - name: enable syncthing
   systemd: name=syncthing enabled=yes state=started user=yes
   tags: syncthing
@@ -114,6 +125,15 @@
   notify: restart syncthing
   tags: dotfiles
 
+- name: generic zshrc when no share folder exists
+  file:
+    state: link
+    src: ~/.config/zsh/.zshrc
+    dest: ~/.zshrc
+    force: true
+  when: shared.stat.isdir is undefined
+  tags: dotfiles
+
 - name: link config files with hardware dependecies
   file:
     state: link
@@ -143,4 +163,8 @@
 
 - import_tasks: vpn_opvn.yml
   when: openvpn is defined
+  tags: vpn
+
+- import_tasks: vpn_opvn_server.yml
+  when: openvpn_server|d(false)
   tags: vpn

@@ -1,9 +1,4 @@
 ---
-etc:
-  udev:
-    rules:
-      - 10-local.rules
-
 base_package:
   - base-devel
   - archlinux-keyring
@@ -41,6 +36,7 @@ package:
   - tig
   - nfs-utils
   - picom
+  - httpie
 
 common_aur_package:
   - yq

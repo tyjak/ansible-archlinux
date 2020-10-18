@@ -24,6 +24,9 @@ misc_package:
   - pulseaudio
   - pulseaudio-alsa
   - pulseaudio-zeroconf
+  # for wifi driver issue need linux_headers and broadcom-wl-dkms
+  - linux-headers
+  - broadcom-wl-dkms
 
 host_service:
   start:
@@ -41,6 +44,8 @@ host_user_service:
 host_links:
   - src: /run/media/david
     dest: /home/david/media
+  - src: ~/share/git
+    dest: ~/.config/git
 
 repo:
   - src: git@github.com:tyjak/vimwiki.git
@@ -59,9 +64,5 @@ config:
     files:
         - 10-magicktrackpad.conf
         - 30-trackpad.conf
-  modprobe:
-    files:
-        # macbooka air modem
-        - local-b43.conf
 
 # vim: filetype=yaml

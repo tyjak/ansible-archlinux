@@ -6,29 +6,32 @@
     - [X] hd space left -> just one not two
     - [X] sound keyboard level up / down  + mute
     - [ ] found a way to maintain configuration across devices and with an intialisation with ansible
-    - [ ] change wifi mouse reght mouse click to choose wifi network (find a solution to choose and connect wifi networks with iwctl, maybe with dmenu)
+    - [ ] change wifi with right mouse click to choose wifi network (find a solution to choose and connect wifi networks with iwctl, maybe with dmenu)
 - [ ] Theme color -> gtk3.0 with theme settings in ~/.config/gtk-3.0/settings.ini or with commadn line : gsettings set org.gnome.desktop.interface gtk-theme NumixSolarizedDarkRed DOES NOT WORK...
 - [ ] ansible gui mode -> replace vim by gvim
-- [o] Background on new window
+- [X] Background on new window
     - [X] Image
-    - [ ] Color -> still have some black background on i3 when launch terminal
+    - [X] Color -> still have some black background on i3 when launch terminal
 - [ ] Button shutdown to show menu instead of shutting down (maybe related with .Xmodmap not applied or badly configured)
 - [X] Mpd popup window
 - [X] clipboard dmenu
 - [ ] pommed refuse to compile
 - [ ] screensaver / lock
-- [X] vimb setting for nopub
+- [ ] Vimb
+    - [X] vimb setting for nopub
+    - [ ] in ansible add installation of my quickswitch repo
 - [ ] github host (no settings for git)
 - [o] ssh
     - [ ] config file
     - [X] public key (for functional gpg-agent) see perso wiki
-- [ ] fix wifi when /etc/modprobe.d/local-b43 is uncommented: b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
+- [X] fix wifi when /etc/modprobe.d/local-b43 is uncommented: b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
         [   11.512822] b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
         [   11.512856] b43 bcma0:1: Direct firmware load for b43-open/ucode16_mimo.fw failed with error -2
         [   11.512891] b43 bcma0:1: Direct firmware load for b43-open/ucode16_mimo.fw failed with error -2
         [   11.512894] b43-phy0 ERROR: Firmware file "b43/ucode16_mimo.fw" not found
         [   11.512903] b43-phy0 ERROR: Firmware file "b43-open/ucode16_mimo.fw" not found
         [   11.512909] b43-phy0 ERROR: You must go to http://wireless.kernel.org/en/users/Drivers/b43#devicefirmware and download the correct firmware for this driver version. Please carefully read all instructions on this website.
+        NOTE: don't use b43 firmware at all, install broadcom-wl-dkms instead see : https://wiki.archlinux.org/index.php/broadcom_wireless#Troubleshooting
 - [ ] zathura put settings in share/.config folder
 - [X] backlight restore not working see note: https://wiki.archlinux.org/index.php/backlight#Save_and_restore_functionality
 - [ ] add backup process
@@ -44,11 +47,15 @@
 
 = TO FIX =
 
-- [X] Crash with ntfs4 autmount volume on startup when mpd is starting seems to be before vpn start, seems to crash when automount unmount the volume
+- [ ] Crash with ntfs4 autmount volume on startup when mpd is starting seems to be before vpn start, seems to crash when automount unmount the volume
     Testing : 
     - [X] disable totaly kernel module for wifi in /etc/modprobe.d/blacklist.conf
     - [X] disable mpd
     - [X] disable vpn
+    - [ ] find an other kernel module
+- [ ] Sound with muliple input source is a mess to control simply with the vol keys in i3
+    - [ ] Find a solution to bind all input volume togother
+    - [ ] Or a good universal setup to have volume control (pamixer installed and i3 conf modifier to use it : see if it's ok)
 
 
  vim: ft=vimwiki

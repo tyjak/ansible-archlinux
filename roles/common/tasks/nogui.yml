@@ -4,7 +4,7 @@
 - name: get new packages to install
   command: yay -Q {{ item }}
   register: packages_presence
-  with_items: "{{ nogui_aur_package }}"
+  with_items: "{{ nogui_aur_package + common_aur_package }}"
   ignore_errors: yes
   changed_when: packages_presence is failed
 
