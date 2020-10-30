@@ -1,0 +1,11 @@
+[Unit]
+Description=User resume actions
+After=suspend.target
+
+[Service]
+User=%I
+Type=simple
+ExecStart=-/bin/sh -c "/usr/bin/xbacklight -set $(cat /tmp/brightness-value)"
+
+[Install]
+WantedBy=suspend.target

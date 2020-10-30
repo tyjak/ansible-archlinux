@@ -1,0 +1,8 @@
+[Match]
+Name=wlan0
+
+[Network]
+DNS=192.168.0.20
+
+[DHCP]
+UseDNS=false

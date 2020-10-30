@@ -42,7 +42,7 @@
     - wifi
     - network
 
-- name: enable and start nework systemds
+- name: enable and start nework systemd
   become: true
   systemd: name={{ item }} state=started enabled=yes
   with_items:
@@ -87,24 +87,53 @@
   ignore_errors: yes
   tags: misc
 
-- name: enable host service
+- name: install host systemd network configuration
+  become: true
+  copy:
+    src: "systemd/network/{{ item }}"
+    dest: "/etc/systemd/network/{{ item }}"
+  with_items: "{{ config.systemd.network }}"
+  when: config.systemd.network|d(false)
+  tags:
+    - systemdconfig
+    - service
+
+- name: install host systemd system configuration
+  become: true
+  copy:
+    src: "systemd/system/{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+  with_items: "{{ config.systemd.system }}"
+  when: config.systemd.system|d(false)
+  tags:
+    - systemdconfig
+    - service
+
+- name: start and enable host service
   become: true
   systemd: name={{ item }} state=started enabled=yes
   with_items: "{{ host_service.start }}"
-  when: host_service is defined
-  tags: misc
+  when: host_service.start|d(false)
+  tags: service
+
+- name: enable only host service
+  become: true
+  systemd: name={{ item }} enabled=yes
+  with_items: "{{ host_service.enable }}"
+  when: host_service.enable|d(false)
+  tags: service
 
 - name: mask some host service
   become: true
   systemd: name={{ item }} masked=yes
   with_items: "{{ host_service.mask|default('') }}"
-  when: host_service is defined and host_service.mask is defined
+  when: host_service.mask|d(false)
   tags: mask
 
 - name: enable user host service
   systemd: name={{ item }} user=yes state=started enabled=yes
   with_items: "{{ host_user_service.start }}"
-  when: host_user_service is defined
+  when: host_user_service.start|d(false)
   tags: misc
 
 

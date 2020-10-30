@@ -27,11 +27,15 @@ misc_package:
   # for wifi driver issue need linux_headers and broadcom-wl-dkms
   - linux-headers
   - broadcom-wl-dkms
+  - acpilight
 
 host_service:
   start:
     - org.cups.cupsd.service
     - avahi-daemon.service
+  enable:
+    - suspend@david.service
+    - resume@root.service
   mask:
     - systemd-backlight@backlight:acpi_video0
 
@@ -62,7 +66,14 @@ config:
     domain: creamy.local
   X11:
     files:
-        - 10-magicktrackpad.conf
-        - 30-trackpad.conf
+      - 10-magicktrackpad.conf
+      - 30-trackpad.conf
+  systemd:
+    network:
+      - 20-wireless.network
+    system:
+      # depends on i3fancy and acpilight
+      - suspend@.service
+      - resume@.service
 
 # vim: filetype=yaml

@@ -33,10 +33,20 @@
         [   11.512909] b43-phy0 ERROR: You must go to http://wireless.kernel.org/en/users/Drivers/b43#devicefirmware and download the correct firmware for this driver version. Please carefully read all instructions on this website.
         NOTE: don't use b43 firmware at all, install broadcom-wl-dkms instead see : https://wiki.archlinux.org/index.php/broadcom_wireless#Troubleshooting
 - [ ] zathura put settings in share/.config folder
+- [ ] install french / engish dictionary
+- [ ] trackpad
+    - [ ] finger gesture
+    - [ ] verify trackpad deactivated on tappings keyboard
 - [X] backlight restore not working see note: https://wiki.archlinux.org/index.php/backlight#Save_and_restore_functionality
+    - [X] see arch hostvar note
+    - [ ] create a share/bin/presuspend and put all the scripts in it that are in /etc/systemd/system/suspend@.service
+    - [ ] pb if manually suspend and lid closed -> it resumes (see if trackpad is the culprit)
+    - [ ] on suspend deactivate trackpad, reactivate on resume
 - [ ] add backup process
+- [ ] add swap memory management
 - [ ] ernergy setup (switch off scree, halt whant battery empty , test seep mode)
-- [ ] No ssh access to creamy (missing key ?)
+    - [ ] for hibernate (with zram) see https://github.com/Nefelim4ag/systemd-swap/issues/85#issuecomment-536539604
+- [X] No ssh access to creamy (missing key ?)
 - [ ] emergency quit on heavy load
 - [ ] Test suspend : seems wakeup put disk in read only mode
 - [ ] DNS resolution add in ansible template for /etc/systemd/resolved.conf (add DNS conf) and /etc/systemd/network/20-wireless.network (force DNS conf for wireless ineterface)
