@@ -28,6 +28,7 @@ misc_package:
   - linux-headers
   - broadcom-wl-dkms
   - acpilight
+  - xautolock
 
 host_service:
   start:

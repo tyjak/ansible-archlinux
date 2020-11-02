@@ -16,7 +16,9 @@
 - [X] Mpd popup window
 - [X] clipboard dmenu
 - [ ] pommed refuse to compile
-- [ ] screensaver / lock
+- [o] screensaver / lock
+    - [X] lock
+    - [ ] screensaver
 - [ ] Vimb
     - [X] vimb setting for nopub
     - [ ] in ansible add installation of my quickswitch repo
@@ -36,29 +38,31 @@
 - [ ] install french / engish dictionary
 - [ ] trackpad
     - [ ] finger gesture
-    - [ ] verify trackpad deactivated on tappings keyboard
+    - [ ] verify trackpad deactivated on tappings keyboard (what is the bin that does this)
 - [X] backlight restore not working see note: https://wiki.archlinux.org/index.php/backlight#Save_and_restore_functionality
     - [X] see arch hostvar note
     - [ ] create a share/bin/presuspend and put all the scripts in it that are in /etc/systemd/system/suspend@.service
     - [ ] pb if manually suspend and lid closed -> it resumes (see if trackpad is the culprit)
-    - [ ] on suspend deactivate trackpad, reactivate on resume
+    - [ ] on suspend deactivate trackpad, reactivate on resume ?
 - [ ] add backup process
 - [ ] add swap memory management
-- [ ] ernergy setup (switch off scree, halt whant battery empty , test seep mode)
+- [ ] emergency quit on heavy load
+- [ ] Enable emergency kill on memory overused
+- [ ] ernergy setup (switch off scree, halt when battery empty , test seep mode)
     - [ ] for hibernate (with zram) see https://github.com/Nefelim4ag/systemd-swap/issues/85#issuecomment-536539604
 - [X] No ssh access to creamy (missing key ?)
-- [ ] emergency quit on heavy load
 - [ ] Test suspend : seems wakeup put disk in read only mode
 - [ ] DNS resolution add in ansible template for /etc/systemd/resolved.conf (add DNS conf) and /etc/systemd/network/20-wireless.network (force DNS conf for wireless ineterface)
 - [ ] Check that systemd-networked and systemd-resolved are enabled and started in ansible
-- [ ] Enable emergency kill on memory overused
 - [ ] fix Weather in i3pystatus
 - [ ] use keys F3 F4 symbol to display last notification and/or cycle within notificaitons history see shortcuts in confi of dunst
+- [ ] in ansible add variable to replace username hard coded
+- [ ] use archlinux logo in i3pystatus with module for pacman updates number
 
 = TO FIX =
 
 - [ ] Crash with ntfs4 autmount volume on startup when mpd is starting seems to be before vpn start, seems to crash when automount unmount the volume
-    Testing : 
+    Testing :
     - [X] disable totaly kernel module for wifi in /etc/modprobe.d/blacklist.conf
     - [X] disable mpd
     - [X] disable vpn
