@@ -3,33 +3,6 @@ archlinux_branch: macbook
 keyboard: mac-azerty
 openvpn: creamy
 
-misc_package:
-  - cups
-  - brother-hl2030
-  - xf86-input-synaptics
-  - xf86-video-fbdev
-  - xf86-video-vesa
-  - libimobiledevice
-  - mpd
-  - mpc
-  - ncmpcpp
-  - beets
-  - acoustid-fingerprint
-  - python-pyacoustid
-  - unzip
-  - vlc
-  - mpv
-  - stig
-  - hfsprogs
-  - pulseaudio
-  - pulseaudio-alsa
-  - pulseaudio-zeroconf
-  # for wifi driver issue need linux_headers and broadcom-wl-dkms
-  - linux-headers
-  - broadcom-wl-dkms
-  - acpilight
-  - xautolock
-
 host_service:
   start:
     - org.cups.cupsd.service
@@ -76,5 +49,36 @@ config:
       # depends on i3fancy and acpilight
       - suspend@.service
       - resume@.service
+    logind:
+      - regexp: '^#HandlePowerKey'
+        line: HandlePowerKey=ignore
+
+
+misc_package:
+  - cups
+  - brother-hl2030
+  - xf86-input-synaptics
+  - xf86-video-fbdev
+  - xf86-video-vesa
+  - libimobiledevice
+  - mpd
+  - mpc
+  - ncmpcpp
+  - beets
+  - acoustid-fingerprint
+  - python-pyacoustid
+  - unzip
+  - vlc
+  - mpv
+  - stig
+  - hfsprogs
+  - pulseaudio
+  - pulseaudio-alsa
+  - pulseaudio-zeroconf
+  # for wifi driver issue need linux_headers and broadcom-wl-dkms
+  - linux-headers
+  - broadcom-wl-dkms
+  - acpilight
+  - xautolock
 
 # vim: filetype=yaml

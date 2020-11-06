@@ -12,7 +12,7 @@
 - [X] Background on new window
     - [X] Image
     - [X] Color -> still have some black background on i3 when launch terminal
-- [ ] Button shutdown to show menu instead of shutting down (maybe related with .Xmodmap not applied or badly configured)
+- [X] Button shutdown to show menu instead of shutting down (maybe related with .Xmodmap not applied or badly configured)
 - [X] Mpd popup window
 - [X] clipboard dmenu
 - [ ] pommed refuse to compile
@@ -26,6 +26,7 @@
 - [o] ssh
     - [ ] config file
     - [X] public key (for functional gpg-agent) see perso wiki
+    - [X] find way for ansible not running remotecommand in ssh config file (see https://unix.stackexchange.com/questions/451253/how-to-configure-ssh-with-a-remotecommand-only-for-interactive-sessions-i-e-wi )
 - [X] fix wifi when /etc/modprobe.d/local-b43 is uncommented: b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
         [   11.512822] b43 bcma0:1: Direct firmware load for b43/ucode16_mimo.fw failed with error -2
         [   11.512856] b43 bcma0:1: Direct firmware load for b43-open/ucode16_mimo.fw failed with error -2

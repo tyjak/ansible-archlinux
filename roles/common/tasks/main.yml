@@ -109,6 +109,18 @@
     - systemdconfig
     - service
 
+- name: customize logind
+  become: true
+  lineinfile:
+    path: "/etc/systemd/logind.conf"
+    regexp: "{{ item.regexp }}"
+    line:  "{{ item.line }}"
+  with_items: "{{ config.systemd.logind }}"
+  when: config.systemd.logind|d(false)
+  tags:
+    - systemdconfig
+    - logind
+
 - name: start and enable host service
   become: true
   systemd: name={{ item }} state=started enabled=yes
