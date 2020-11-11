@@ -74,6 +74,7 @@
   tags: "dotfiles"
 
 - name: link host files
+  become: true
   file:
     state: link
     src: "{{ item.src }}"
@@ -167,4 +168,4 @@
 
 - import_tasks: vpn_opvn_server.yml
   when: openvpn_server|d(false)
-  tags: vpn
+  tags: vpnserver

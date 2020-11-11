@@ -3,10 +3,17 @@
 - name: add settings in xinitrc
   lineinfile: dest=~/.xinitrc insertafter="^# var settings" line="{{ item }}"
   with_items: "{{ config.xinitrc }}"
+  when: config.xinitrc|d(False)
 
 - name: make zsh default shell
   become: true
   command: chsh -s /usr/bin/zsh {{ ansible_user_id }}
+
+# FIXME: Not permanent...
+#- name: install custom DNS
+#  become: true
+#  command: systemd-resolve --interface {{ ansible_default_ipv4.interface }} --set-dns {{ config.dns.ip }} --set-domain {{ config.dns.domain }}
+#  tags: dns
 
 - name: test if wyebadblock is installed
   become: true
@@ -14,11 +21,12 @@
   register: wyebadblock
   tags: adblock
 
-# FIXME: Not permanent...
-#- name: install custom DNS
-#  become: true
-#  command: systemd-resolve --interface {{ ansible_default_ipv4.interface }} --set-dns {{ config.dns.ip }} --set-domain {{ config.dns.domain }}
-#  tags: dns
+- name: create wyeadblock config folder
+  file:
+    path: ~/.config/wyebadblock
+    state: directory
+  when: wyebadblock.stat.exists
+  tags: adblock
 
 - name: install last adblock css file
   get_url:

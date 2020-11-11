@@ -6,6 +6,7 @@ alarmpi
 do2
 vultr
 archeesw
+kamatera
 
 #servers with gui
 [ground]
@@ -17,3 +18,4 @@ asus
 archmini
 archeepe
 archozma
+vagrant

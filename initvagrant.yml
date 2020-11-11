@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: vagrant
   user: vagrant
   become: true
   tags: init

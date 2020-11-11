@@ -17,6 +17,7 @@
   tags: pkg
 
 - import_tasks: configure_locale.yml
+  tags: locale
 
 - import_tasks: install_yay.yml
   when: install is undefined or install!='minimal'

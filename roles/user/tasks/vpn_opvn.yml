@@ -42,7 +42,7 @@
 
 - name: assume systemd-resolved is started
   become: true
-  systemd: name="systemd-resolved" enabled=yes
+  systemd: name="systemd-resolved" enabled=yes state=started
   tags: vpn
 
 - name: enable openvpn vpn service

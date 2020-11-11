@@ -2,6 +2,7 @@
 archlinux_branch: macbook
 keyboard: mac-azerty
 openvpn: creamy
+customstart: true
 
 host_service:
   start:
@@ -65,7 +66,7 @@ misc_package:
   - mpc
   - ncmpcpp
   - beets
-  - acoustid-fingerprint
+  - acoustid-fingerprinter
   - python-pyacoustid
   - unzip
   - vlc

@@ -1,6 +1,8 @@
 = TO fix / TODO =
 
 - [ ] Splash screen : try plymouth and try to have only onr time password entry
+- [ ] How anible manage to deploy github repo if no public key available need to switch to http clone (aka vimiki can't deploy)
+- [ ] finish autolock script in [[share/bin/autolock]]
 - [o] Status bar
     - [X] updates yay
     - [X] hd space left -> just one not two
@@ -59,6 +61,9 @@
 - [ ] use keys F3 F4 symbol to display last notification and/or cycle within notificaitons history see shortcuts in confi of dunst
 - [ ] in ansible add variable to replace username hard coded
 - [ ] use archlinux logo in i3pystatus with module for pacman updates number
+- [ ] vagrant test installation
+    - [ ] don't create user host, use vagrant (actually host user is deployed and install but i3 is set for vagrant not host user)
+    - [ ] fix localisation (keyboard messed up qwerty instead of azerty, same in login manager qwerty)
 
 = TO FIX =
 

@@ -64,13 +64,10 @@ gui_pacman_package:
   - gtk3
   - udiskie
   - i3-wm
-  - i3lock-color-git
-  - i3lock-fancy-git
   - unclutter
   - pavucontrol
   - avahi
   - paprefs
-  - wyebadblock-git
   - zathura
   - zathura-pdf-mupdf
 
@@ -104,6 +101,9 @@ gui_aur_package:
   - lxappearance
   - menu-calc
   - redshift
+  - i3lock-color-git
+  - i3lock-fancy-git
+  - wyebadblock-git
 
 fonts_package:
   - freetype2

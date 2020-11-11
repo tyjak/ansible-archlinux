@@ -74,6 +74,7 @@
 - name: enable lightdm at boot
   become: true
   systemd: name=lightdm enabled=yes
+  when: not customstart|d(false)
 
 # TOFIX: this setting seems not to be permanent...
 - name: configure theme
