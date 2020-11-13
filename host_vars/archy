@@ -42,6 +42,7 @@ config:
   X11:
     files:
       - 10-magicktrackpad.conf
+      - 20-intel.conf
       - 30-trackpad.conf
   systemd:
     network:
@@ -61,6 +62,7 @@ misc_package:
   - xf86-input-synaptics
   - xf86-video-fbdev
   - xf86-video-vesa
+  - xf86-video-intel
   - libimobiledevice
   - mpd
   - mpc

@@ -12,6 +12,8 @@ link_common_items:
 link_gui_items:
   - src: archlinux/.Xresources
     dest: .Xresources
+  - src: archlinux/.xprofile
+    dest: .xprofile
   - src: archlinux/.xinitrc
     dest: .xinitrc
   - src: archlinux/.fehbg
