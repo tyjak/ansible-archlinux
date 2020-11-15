@@ -1,8 +1,10 @@
 = TO fix / TODO =
 
-- [ ] Splash screen : try plymouth and try to have only onr time password entry
+- [X] Splash screen : try plymouth and try to have only onr time password entry
+- [ ] Yay optimze cache and version keep for AUR package
 - [ ] How anible manage to deploy github repo if no public key available need to switch to http clone (aka vimiki can't deploy)
 - [ ] finish autolock script in [[share/bin/autolock]]
+- [ ] Vim set transparency gpg enryption (with .gpg added in file extension when saving anf when use :X)
 - [o] Status bar
     - [X] updates yay
     - [X] hd space left -> just one not two

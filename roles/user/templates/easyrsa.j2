@@ -1,0 +1,8 @@
+set_var EASYRSA_BATCH           "{{ openvpn_server.easyrsa.batch|d("no") }}"
+set_var EASYRSA_REQ_CN          "{{ openvpn_server.easyrsa.cn|d(inventory_hostname) }}"
+set_var EASYRSA_REQ_COUNTRY     "{{ openvpn_server.easyrsa.country|d("FR") }}"
+set_var EASYRSA_REQ_PROVINCE    "{{ openvpn_server.easyrsa.province|d("IdF") }}"
+set_var EASYRSA_REQ_CITY        "{{ openvpn_server.easyrsa.city|d("Paris") }}"
+set_var EASYRSA_REQ_ORG         "{{ openvpn_server.easyrsa.org|d("Copyleft Certificate Co") }}"
+set_var EASYRSA_REQ_EMAIL       "{{ openvpn_server.easyrsa.email|d("me@example.net") }}"
+set_var EASYRSA_REQ_OU          "{{ openvpn_server.easyrsa.ou|d("ACME") }}"

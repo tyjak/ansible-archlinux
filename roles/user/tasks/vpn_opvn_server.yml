@@ -1,0 +1,150 @@
+---
+# install OpenVPN via docker https://github.com/kylemanna/docker-openvpn
+
+- name: test if docker installed
+  stat:
+    path: /usr/bin/docker
+  register: docker_installed
+  tags: docker
+
+- name: install docker
+  command: /usr/bin/yay --noconfirm -S docker
+  when: not docker_installed.stat.exists
+  tags: docker
+
+- name: enable and start docker
+  become: true
+  systemd: name=docker state=started enabled=yes
+  tags: docker
+
+- name: Install docker python module
+  become: true
+  pip:
+    name: docker
+
+- name: Pull docker openvpnserver
+  become: true
+  community.general.docker_image:
+    name: kylemanna/openvpn
+    source: pull
+  tags: vpnserver
+
+- name: Create volume
+  become: true
+  community.general.docker_volume:
+    name: ovpn-data-server
+  tags: vpnserver
+
+#docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM
+- name: Init openvpn config
+  become: true
+  community.general.docker_container:
+    name: openvpn_genconfig
+    image: kylemanna/openvpn
+    container_default_behavior: compatibility
+    #detach: no
+    #cleanup: no
+    #log_driver: none
+    volumes: ovpn-data-server:/etc/openvpn
+    command: "ovpn_genconfig -u udp://{{ openvpn_server.hostname }}"
+  tags: vpnserver
+
+- name: generate easyrsa tmp file
+  template:
+    src: easyrsa.j2
+    dest: /tmp/easyrsa
+  tags: vpnserver
+
+#docker run --rm -v $PWD:/source -v my_volume:/dest -w /source alpine cp myfile.txt /dest
+- name: Copy easyrsa vars file
+  become: true
+  community.general.docker_container:
+    name: openvpn_easyrsa_vars
+    image: kylemanna/openvpn
+    container_default_behavior: compatibility
+    cleanup: yes
+    log_driver: json-file
+    volumes:
+      - ovpn-data-server:/etc/openvpn
+      - /tmp:/tmp
+    working_dir: /tmp
+    command: cp easyrsa /etc/openvpn/vars
+  tags: vpnserver
+
+- name: Generate private key file
+  become: true
+  community.general.docker_container:
+    name: openvpn_initpki
+    image: kylemanna/openvpn
+    container_default_behavior: no_defaults
+    detach: no
+    cleanup: yes
+    log_driver: none
+    volumes: ovpn-data-server:/etc/openvpn
+    command: ovpn_initpki nopass
+  tags: vpnserver
+
+- name: start server
+  become: true
+  community.general.docker_container:
+    name: openvpn_server
+    image: kylemanna/openvpn
+    container_default_behavior: compatibility
+    state: started
+    volumes: ovpn-data-server:/etc/openvpn
+    published_ports: 1194:1194/udp
+    capabilities: NET_ADMIN
+  tags: vpnserver
+
+# docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass
+- name: Generate client configuration
+  become: true
+  community.general.docker_container:
+    name: openvpn_clientconf
+    image: kylemanna/openvpn
+    container_default_behavior: no_defaults
+    detach: no
+    cleanup: yes
+    volumes: ovpn-data-server:/etc/openvpn
+    command: "easyrsa build-client-full {{ item }} nopass"
+  with_items: "{{ openvpn_server.clients }}"
+  tags: vpnclientconf
+  ignore_errors: yes
+
+# docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
+- name: Generate client configuration
+  become: true
+  community.general.docker_container:
+    name: openvpn_clientconf_get
+    image: kylemanna/openvpn
+    container_default_behavior: no_defaults
+    detach: no
+    cleanup: yes
+    output_logs: true
+    volumes: ovpn-data-server:/etc/openvpn
+    command: "ovpn_getclient {{ item }} combined > {{ item }}"
+  with_items: "{{ openvpn_server.clients }}"
+  register: vpnclientconf
+  tags: vpnclientconf
+
+- name: Get client conf
+  ansible.builtin.copy:
+    content: "{{ item.container.Output }}"
+    dest: ./{{ item.item }}.ovpn
+  with_items: "{{ vpnclientconf.results }}"
+  when: item.item|d(false) and item.item in openvpn_server.clients
+  tags: vpnclientconf
+
+# docker run --rm -it -v $OVPN_DATA:/etc/openvpn kylemanna/openvpn ovpn_revokeclient client1 remove
+- name: revoke a user
+  become: true
+  community.general.docker_container:
+    name: openvpn_revoke
+    image: kylemanna/openvpn
+    container_default_behavior: no_defaults
+    cleanup: yes
+    volumes: ovpn-data-server:/etc/openvpn
+    command: "ovpn_revokeclient {{ item }} remove"
+  with_items: "{{ openvpn_server.revoke }}"
+  when: openvpn_server.revoke|d(false)
+  tags: vpnclientrevoke
