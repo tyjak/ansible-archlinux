@@ -4,7 +4,7 @@
 - [X] Yay optimze cache and version keep for AUR package
     - [X] A early nice way to do it with only paccache but need some user settings in none user env... https://www.reddit.com/r/archlinux/comments/gcxyvh/yay_cache_management/
     - [X] A simple script taken from here : https://gist.github.com/luukvbaal/2c697b5e068471ee989bff8a56507142/raw/a8709e4b95496c9f75d0dc1a47bec34367602969/upgradehook
-- [ ] How anible manage to deploy github repo if no public key available need to switch to http clone (aka vimiki can't deploy)
+- [ ] How ansible manage to deploy github repo if no public key available need to switch to http clone (aka vimiki can't deploy)
 - [ ] finish autolock script in [[share/bin/autolock]]
 - [ ] Vim set transparency gpg enryption (with .gpg added in file extension when saving anf when use :X)
 - [o] Status bar
