@@ -19,25 +19,34 @@
 
 - name: test if config is present
   become: true
-  stat: path=/etc/openvpn/client/"{{ openvpn }}".conf
+  stat: path="/etc/openvpn/client/{{ item }}.conf"
   register: openvpn_conf
+  with_items: "{{ openvpn }}"
   tags: vpn
 
 - name: copy openvpn config
   become: true
-  copy: src="vpn/{{ openvpn }}_openvpn.vault" dest="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz"
-  when: openvpn_conf.stat.exists == False
+  copy:
+    src: "vpn/{{ item.item }}_openvpn.vault"
+    dest: "/etc/openvpn/{{ item.item }}_openvpn.tar.gz"
+  when: item.stat.exists == False
+  with_items: "{{ openvpn_conf.results }}"
   tags: vpn
+
+# stop point
+#- meta: end_play
 
 - name: copy and install openvpn config
   become: true
-  unarchive: src="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz" dest=/etc/openvpn/client/ remote_src=yes
-  when: openvpn_conf.stat.exists == False
+  unarchive: src="/etc/openvpn/{{ item.item }}_openvpn.tar.gz" dest=/etc/openvpn/client/ remote_src=yes
+  when: item.stat.exists == False
+  with_items: "{{ openvpn_conf.results }}"
   tags: vpn
 
 - name: delete the archive
   become: true
-  file: path="/etc/openvpn/{{ openvpn }}_openvpn.tar.gz" state=absent
+  file: path="/etc/openvpn/{{ item.item }}_openvpn.tar.gz" state=absent
+  with_items: "{{ openvpn_conf.results }}"
   tags: vpn
 
 - name: assume systemd-resolved is started
@@ -47,6 +56,7 @@
 
 - name: enable openvpn vpn service
   become: true
-  systemd: name="openvpn-client@{{ openvpn }}" enabled=yes
+  systemd: name="openvpn-client@{{ item.item }}" state=started
+  with_items: "{{ openvpn_conf.results }}"
   tags: vpn
 

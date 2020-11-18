@@ -1,7 +1,9 @@
 ---
 archlinux_branch: macbook
 keyboard: mac-azerty
-openvpn: creamy
+openvpn:
+  - creamy
+  - kamatera
 customstart: true
 
 host_service:

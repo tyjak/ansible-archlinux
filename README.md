@@ -13,11 +13,15 @@ How to use
 
 Add deploy VPN Configuration
 ----------------------------
-Execute `./utils/generate_ansible_openvpn_vault_file.sh {NAME OF YOU VPN LINK}` in root.
 
+To deplay a client vpn configuration, a openvpn configuration vaulted file is needed.
+
+This is the procedure to generate the vaulted file:
+
+Execute `./utils/generate_ansible_openvpn_vault_file.sh NAME_OF_YOUR_VPN_CONNECTION VPN_CONF_FILENAME PATH_TO_VPNCONF_DIR
 
 It will :
-- make an archive of your /etc/openvpn/client/{NAME OF YOUR VPN LINK}_openvpn.* files
+- make an archive of your /{PATH_TO_YOUR_VPN_CONF}/{NAME OF YOUR VPN LINK}_openvpn.* files
 - put in ./roles/user/file/vpn/{NAME OF YOUR VPN LINK}_openvpn.vault
 - encrypted it
 
