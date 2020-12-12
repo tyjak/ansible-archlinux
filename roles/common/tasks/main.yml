@@ -27,7 +27,7 @@
   #  command: pacman-key --refresh-keys
 
 - name: has wifi ?
-  shell: dmesg | grep -i "wlan"
+  shell: ls /sys/class/net | grep -i "wlan"
   register: has_wifi
   changed_when: has_wifi is success
   ignore_errors: true
@@ -43,13 +43,46 @@
     - wifi
     - network
 
-- name: enable and start nework systemd
+- name: enable and start wifi
+  become: true
+  systemd: name=iwd state=started enabled=yes
+  when: has_wifi is success
+  tags:
+    - wifi
+    - network
+
+- name: configure wifi
+  become: true
+  command: "iwctl --passphrase {{ wifi.passphrase }} station {{ wifi.device }} connect {{ wifi.ssid }}"
+  when:
+    - has_wifi is success
+    - wifi|d(false)
+  tags:
+    - wifi
+    - network
+
+- name: enable and start NetwokManager if defined
+  become: true
+  systemd:
+    name: NetworkManager
+    state: started
+    enabled: yes
+  when: "'NetworkManager' in misc_package|d([])"
+  register: networkmanager
+  tags:
+    - wifi
+    - network
+
+- name: enable and start network systemd
   become: true
   systemd: name={{ item }} state=started enabled=yes
   with_items:
     - systemd-networkd
     - systemd-resolved
-  tags: network
+  when: networkmanager is failed
+  tags:
+    - wifi
+    - network
 
 - import_tasks: nogui.yml
   when: not gui
@@ -122,19 +155,39 @@
     - systemdconfig
     - logind
 
+- name: configure etc files with block
+  become: true
+  blockinfile:
+    path: "{{ item.path }}"
+    block: "{{ item.block }}"
+    owner: "{{ item.owner|d(omit) }}"
+    group: "{{ item.group|d(omit) }}"
+    insertafter: "{{ item.insertafter|d(omit) }}"
+  with_items: "{{ config.etc }}"
+  when:
+    - config.etc|d(false)
+    - item.block|d(false)
+  tags:
+      - misc
+      - etc
+
 - name: start and enable host service
   become: true
   systemd: name={{ item }} state=started enabled=yes
   with_items: "{{ host_service.start }}"
   when: host_service.start|d(false)
-  tags: service
+  tags:
+    - service
+    - misc
 
 - name: enable only host service
   become: true
   systemd: name={{ item }} enabled=yes
   with_items: "{{ host_service.enable }}"
   when: host_service.enable|d(false)
-  tags: service
+  tags:
+    - service
+    - misc
 
 - name: mask some host service
   become: true
@@ -147,8 +200,9 @@
   systemd: name={{ item }} user=yes state=started enabled=yes
   with_items: "{{ host_user_service.start }}"
   when: host_user_service.start|d(false)
-  tags: misc
-
+  tags:
+    - service
+    - misc
 
 #- import_tasks: install_vpn.yml
 #  tags: vpn

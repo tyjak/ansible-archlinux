@@ -101,6 +101,7 @@
     image: kylemanna/openvpn
     container_default_behavior: compatibility
     state: started
+    restart_policy: unless-stopped
     volumes: ovpn-data-server:/etc/openvpn
     published_ports: 1194:1194/udp
     capabilities: NET_ADMIN

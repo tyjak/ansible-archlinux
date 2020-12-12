@@ -1,7 +1,9 @@
 ---
 - name: set hostname
   become: true
-  lineinfile: dest=/etc/hostname regexp="^{{ hostname|default(ansible_nodename) }}" line="{{ hostname|default(ansible_nodename) }}" create=yes state=present backrefs=yes
+  hostname:
+    name: "{{ inventory_hostname }}"
+    use: systemd
   tags: hostname
 
 - name: set hosts
@@ -9,9 +11,9 @@
   lineinfile: dest=/etc/hosts regexp="{{ item.regexp }}" line="{{ item.line }}" create=yes state=present backrefs=yes
   with_items:
     - regexp: '^127.*localhost$'
-      line: "127.0.0.1  {{ hostname|default(ansible_nodename) }}.localdomain  {{ hostname|default(ansible_nodename) }}"
+      line: "127.0.0.1  {{ inventory_hostname }}.localdomain  {{ inventory_hostname }}"
     - regexp: '^::1.*localhost$'
-      line: "::1  {{ hostname|default(ansible_nodename) }}.localdomain  {{ hostname|default(ansible_nodename) }}"
+      line: "::1  {{ inventory_hostname }}.localdomain  {{ inventory_hostname }}"
   tags: hostname
 
 - name: set timezone

@@ -1,6 +1,6 @@
+#ansible-playbook -k -i hosts init.yml --limit={host target}
 - hosts: all
-  become: true
-  become_method: su
+  user: root
   tags: init
   vars:
   - ssh_user: "{{ lookup('env','USER') }}"

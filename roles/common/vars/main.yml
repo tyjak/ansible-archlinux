@@ -37,6 +37,7 @@ package:
   - nfs-utils
   - picom
   - httpie
+  - ncdu
 
 common_aur_package:
   - yq
@@ -77,13 +78,13 @@ gui_aur_package:
   - python-colour
   - python-psutil
   - dmenu2
+  - passdmenu-gen
   - i3pystatus-git
   - quickswitch-i3
   - clipmenu
 #  - htop-vim-solarized-git
   - weather
   - vimb
-  - quickswitch-i3
   - python-basiciw
   - urlview
 # WARNING numix install inkscape and doesn't remove it TODO: remove inkscape
