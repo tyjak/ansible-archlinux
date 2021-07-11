@@ -45,6 +45,7 @@ common_aur_package:
   - oh-my-zsh-git
   - direnv
   - python-virtualenvwrapper
+  - pal-git
 
 nogui_aur_package:
   - vim
@@ -81,6 +82,7 @@ gui_aur_package:
   - passdmenu-gen
   - i3pystatus-git
   - quickswitch-i3
+  - python-i3-grid
   - clipmenu
 #  - htop-vim-solarized-git
   - weather

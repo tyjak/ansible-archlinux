@@ -1,0 +1,52 @@
+---
+keyboard: "mac-azerty"
+vpn:
+  ppp: false
+  openvpn: false
+customstart: true
+
+misc_package:
+  - gdm
+  - nvidia
+  - brother-hl2030
+  - cups
+  - firefox
+  - flatpak
+  - gnome
+  - libinput-gestures
+  - molotov
+  - nohang-git
+  - avahi
+  - pulseaudio-zeroconf
+  - screenfetch
+  - evolution
+  - lollypop
+  - gnome-packagekit
+  - NetworkManager
+
+host_service:
+  start:
+    - gdm
+    - avahi-daemon
+  enable:
+    - cups.socket
+
+config:
+  etc:
+    - path: /etc/NetworkManager/NetworkManager.conf
+      block: |
+        [device]
+        wifi.backend=iwd
+
+wifi:
+  device: wlan0
+  ssid: SFR_7920_5GHZ
+  passphrase: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65656336333131666662643834663733336633663635623166616439383361396262336633363934
+          6139363332646431653835336534613163656163323838620a353135306335633331323834323232
+          61643964666537323164376334396364646266643661386333653536353337333736316534396338
+          3230383138343333310a303931643037363464373637643164373937633266333365653361353138
+          36656636363234626362366164643437633034393934313962336465643665303832
+
+# vim: filetype=yaml

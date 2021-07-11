@@ -10,6 +10,9 @@ host_service:
   start:
     - org.cups.cupsd.service
     - avahi-daemon.service
+    - systemd-swap
+    - nohang-desktop
+    - bitlbee.service
   enable:
     - suspend@david.service
     - resume@root.service
@@ -57,6 +60,17 @@ config:
       - regexp: '^#HandlePowerKey'
         line: HandlePowerKey=ignore
 
+config:
+  etc:
+    - path: /etc/bitlbee/bitlbee.conf
+      block: |
+        User = bitlbee
+        DaemonInterface = 127.0.0.1
+        DaemonPort = 6667
+      insertafter: \[settings\]
+      owner: bitlbee
+      group: bitlbee
+
 
 misc_package:
   - cups
@@ -70,7 +84,6 @@ misc_package:
   - mpc
   - ncmpcpp
   - beets
-  - acoustid-fingerprinter
   - python-pyacoustid
   - unzip
   - vlc
@@ -85,5 +98,11 @@ misc_package:
   - broadcom-wl-dkms
   - acpilight
   - xautolock
+  - systemd-swap
+  - nohang-git
+  - bitlbee-libpurple
+  - bitlbee-facebook
+  - bitlbee-mastodon-git
+  - bitlbee-discord-git
 
 # vim: filetype=yaml

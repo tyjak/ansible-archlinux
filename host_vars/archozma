@@ -18,11 +18,13 @@ misc_package:
   - paprefs
   - gnome-packagekit
   - kodi
+  - systemd-swap
 
 host_service:
   start:
     - org.cups.cupsd.service
     - avahi-daemon.service
+    - systemd-swap
 
 config:
   xinitrc:
