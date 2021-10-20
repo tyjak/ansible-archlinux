@@ -11,7 +11,7 @@
   tags: oh
 
 - name: enable syncthing
-  systemd: name=syncthing enabled=yes state=started user=yes
+  systemd: name=syncthing enabled=yes state=started scope=user
   tags: syncthing
 
 # NOT SECURE TO OPEN TO THE INTERNET PREFER SSH forwarding method to access web interface from other lan device
@@ -26,7 +26,7 @@
 
 - name: "checkout dot files"
   git:
-    repo: http://github.com/tyjak/archlinux
+    repo: https://github.com/tyjak/archlinux
     dest: ~/src/archlinux
     remote: archlinux_branch
     version: "{{ archlinux_branch|default('master') }}"
@@ -35,7 +35,7 @@
 
 - name: "checkout vim files"
   git:
-    repo: http://github.com/tyjak/vim-config
+    repo: https://github.com/tyjak/vim-config
     dest: ~/src/vim-config
     update: no
   register: vim_config_installed

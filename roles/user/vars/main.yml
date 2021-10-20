@@ -28,6 +28,8 @@ link_share_items:
     dest: .zshrc
   - src: fonts
     dest: .local/share/fonts
+  - src: .config/cointop
+    dest: .config/cointop
 
 link_macbook_items:
   - src: archlinux/.Xmodmap

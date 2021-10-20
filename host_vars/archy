@@ -39,8 +39,7 @@ config:
   xinitrc:
     - export BROWSER=/usr/bin/vimb
     - export PRINTER=Brother_HL_2030_series
-  cupsclient:
-    - 192.168.0.40
+  cupsclient: 192.168.0.9
   dns:
     ip: 192.168.0.20
     domain: creamy.local
@@ -59,8 +58,6 @@ config:
     logind:
       - regexp: '^#HandlePowerKey'
         line: HandlePowerKey=ignore
-
-config:
   etc:
     - path: /etc/bitlbee/bitlbee.conf
       block: |

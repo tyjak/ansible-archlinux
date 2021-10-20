@@ -36,6 +36,23 @@
   when: wyebadblock.stat.exists
   tags: adblock
 
+# TODO: check if cups instalation is mandatory for client only usage
+- name: check cups install
+  stat: path=/etc/cups
+  register: cups
+  tags: printer
+
+- name: install printer client conf
+  become: true
+  copy:
+      dest: "/etc/cups/client.conf"
+      content: |
+        ServerName {{ config.cupsclient }}
+  when:
+    - cups.stat.exists
+    - config.cupsclient|d(False)
+  tags: printer
+
 # NOTE: not needed since wyebadblock install normaly the plugin itself
 #- name: test if vimb plugin dir exists
 #  become: true

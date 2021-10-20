@@ -13,6 +13,30 @@ pacman_misc_package:
   - vim
   - bluez
   - bluez-utils
+  - docker
+  - tmux
+  - zsh
+  - nfs-utils
+  - iftop
+  - ncdu
+  - tig
+  - borgmatic
+  - rclone
+  - usbutils
+
+config:
+  etc:
+    - path: /etc/hosts
+      block: |
+        192.168.0.20 creamy.local
+    - path: /etc/fstab
+      block: |
+        # syno music
+        creamy.local:/volume1/music			/home/david/music   nfs4		rw,sync,noauto,x-systemd.automount,x-systemd.device-timeout=1min,nofail,_netdev,noatime 0 0
+        # syno video
+        creamy.local:/volume1/video			/home/david/video   nfs4		rw,sync,noauto,x-systemd.automount,x-systemd.device-timeout=1min,nofail,_netdev,noatime 0 0
+        # syno livre
+        creamy.local:/volume1/book			/home/david/calibre-web/books   nfs4		rw,sync,noauto,x-systemd.automount,x-systemd.device-timeout=1min,nofail,_netdev,noatime 0 0
 
 host_service:
   start:

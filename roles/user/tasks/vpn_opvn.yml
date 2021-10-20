@@ -1,4 +1,5 @@
 ---
+# Note: to update vpn conf file you need to remove it completly and redeploy (no indepotent because it's encrypted)
 
 - name: install openvpn
   become: true
@@ -46,6 +47,15 @@
 - name: delete the archive
   become: true
   file: path="/etc/openvpn/{{ item.item }}_openvpn.tar.gz" state=absent
+  with_items: "{{ openvpn_conf.results }}"
+  tags: vpn
+
+- name: change owner for password file
+  become: true
+  file:
+    path: /etc/openvpn/client/{{ item.item }}.auth
+    owner: openvpn
+  when: item.stat.exists == False
   with_items: "{{ openvpn_conf.results }}"
   tags: vpn
 

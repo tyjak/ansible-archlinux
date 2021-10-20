@@ -1,6 +1,7 @@
 ---
 base_package:
   - base-devel
+  - inetutils
   - archlinux-keyring
   - man-db
   - man-pages
@@ -10,6 +11,7 @@ base_package:
   - htop
   - zsh
   - git
+  - pacman-contrib
 
 package:
   - polkit
